@@ -8,6 +8,7 @@
 #'
 #' @import dplyr
 #' @import tidymodels
+#' @import tidyr
 #'
 #'
 #' @return A sub-sampled input data.frame
