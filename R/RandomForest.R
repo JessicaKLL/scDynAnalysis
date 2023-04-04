@@ -12,7 +12,7 @@
 #' @param proximity Should proimity measure among the rows be calculated? (Default = NULL)
 #'
 #' @import rsample
-#' @import randomForest
+#' @import randomforest
 #'
 #' @return The random forest model with its input data
 #'
