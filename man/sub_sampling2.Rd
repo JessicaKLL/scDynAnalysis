@@ -4,7 +4,7 @@
 \alias{sub_sampling2}
 \title{Sub-sampling}
 \usage{
-sub_sampling2(Freq, data, group_class)
+sub_sampling2(Freq, data)
 }
 \arguments{
 \item{Freq}{The number of samples that are selected from each group}

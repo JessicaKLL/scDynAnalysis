@@ -4,7 +4,7 @@
 \alias{iter_corr}
 \title{Iteration of random-subsets correlation matrix}
 \usage{
-iter_corr(data1, data2, n = 100, decreasing = TRUE)
+iter_corr(data1, data2, n = 100, decreasing = TRUE, perc = 0.3)
 }
 \arguments{
 \item{data1}{Time-point data.frame 1}
@@ -14,6 +14,8 @@ iter_corr(data1, data2, n = 100, decreasing = TRUE)
 \item{n}{Number of iterations (Default=100)}
 
 \item{decreasing}{Show correlations decreasing? (Default=TRUE)}
+
+\item{perc}{The fraction of cells selected in each cell type}
 }
 \value{
 A list which contains n data.frames of the correlation of each feature in different time-points

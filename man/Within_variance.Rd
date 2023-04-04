@@ -4,7 +4,7 @@
 \alias{Within_variance}
 \title{Significance of the within time-point variance}
 \usage{
-Within_variance(data1, data2, n = 100)
+Within_variance(data1, data2, n = 100, perc = 0.1)
 }
 \arguments{
 \item{data1}{Time-point data.frame 1}
@@ -12,6 +12,8 @@ Within_variance(data1, data2, n = 100)
 \item{data2}{Time-point data.frame 2}
 
 \item{n}{Number of iterations (Default=100)}
+
+\item{perc}{The fraction of cells selected in each cell type}
 }
 \value{
 A data.frame containing the p-values between the iterations

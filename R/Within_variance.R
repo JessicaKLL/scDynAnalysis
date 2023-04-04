@@ -5,6 +5,7 @@
 #' @param data1 Time-point data.frame 1
 #' @param data2 Time-point data.frame 2
 #' @param n Number of iterations (Default=100)
+#' @param perc The fraction of cells selected in each cell type
 #'
 #' @import tidymodels
 #'
@@ -14,10 +15,10 @@
 #' 
 
 
-Within_variance<-function(data1,data2,n=100){
+Within_variance<-function(data1,data2,n=100,perc=0.1){
   Output_list<-list()
 
-  z<-iter_corr(data1,data2,n=n,decreasing=F)
+  z<-iter_corr(data1,data2,n=n,decreasing=F,perc=perc)
 
   for (i in c(1:n)) {
     id<-rep(i,nrow(z[[i]]))

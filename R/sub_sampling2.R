@@ -17,7 +17,7 @@
 #' @export
 #'
 
-sub_sampling2<-function(Freq,data,group_class){
+sub_sampling2<-function(Freq,data){
   nested_data<- data %>%
     rownames_to_column('cell') %>%
     group_by(cell_type) %>%

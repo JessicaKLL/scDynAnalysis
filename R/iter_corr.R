@@ -8,15 +8,16 @@
 #' @param data2 Time-point data.frame 2
 #' @param n Number of iterations (Default=100)
 #' @param decreasing Show correlations decreasing? (Default=TRUE)
+#' @param perc The fraction of cells selected in each cell type
 #'
 #' @return A list which contains n data.frames of the correlation of each feature in different time-points
 #'
 #' @export
 
-iter_corr<-function(data1,data2,n=100,decreasing=TRUE){
+iter_corr<-function(data1,data2,n=100,decreasing=TRUE,perc=0.3){
   output<-list()
   for (i in c(1:n)){
-    correlation_i<-calc_correlation(data1,data2)
+    correlation_i<-calc_correlation(data1,data2,perc=perc)
     df<-data.frame(data_1=rownames(correlation_i$correlation_matrix)[row(correlation_i$correlation_matrix)],
                    data_2=colnames(correlation_i$correlation_matrix)[col(correlation_i$correlation_matrix)],
                    corr=c(correlation_i$correlation_matrix))

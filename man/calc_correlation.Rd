@@ -4,12 +4,14 @@
 \alias{calc_correlation}
 \title{Calculate the correlation}
 \usage{
-calc_correlation(data1, data2)
+calc_correlation(data1, data2, perc = 0.1)
 }
 \arguments{
 \item{data1}{Time-point data.frame 1}
 
 \item{data2}{Time-point data.frame 2}
+
+\item{perc}{The fraction of cells selected in each cell type}
 }
 \value{
 A list which contains the cells selected in data1 and data2, and a correlation matrix.

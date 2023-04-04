@@ -15,7 +15,7 @@
 #'
 
 
-sub_sampling1<-function(input,perc=0.3){
+sub_sampling1<-function(input,perc=0.1){
   Input<-input %>%
     group_by(cell_type) %>%
     sample_frac(perc)

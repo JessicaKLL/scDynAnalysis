@@ -7,7 +7,7 @@
 #' @param tree_num The index of the tree which you want to extract from the model
 #' @param main The title of the plot
 #'
-#' @import randomForest
+#' @import randomforest
 #' @import dplyr
 #' @import ggraph
 #' @import igraph

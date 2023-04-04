@@ -4,6 +4,7 @@
 #'
 #' @param data1 Time-point data.frame 1
 #' @param data2 Time-point data.frame 2
+#' @param perc The fraction of cells selected in each cell type
 #'
 #' @import dplyr
 #' @import tidymodels
@@ -12,8 +13,8 @@
 #'
 #' @export
 
-calc_correlation<-function(data1, data2){
-  Filter<-sub_sampling1(data1)
+calc_correlation<-function(data1, data2,perc=0.1){
+  Filter<-sub_sampling1(data1,perc = perc)
   data_1<-sub_sampling2(Filter,data1)
   data_2<-sub_sampling2(Filter,data2)
   list_of_results<-list(data1=rownames(data_1),

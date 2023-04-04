@@ -4,7 +4,7 @@
 \alias{sub_sampling1}
 \title{Get frequency}
 \usage{
-sub_sampling1(input, perc = 0.3)
+sub_sampling1(input, perc = 0.1)
 }
 \arguments{
 \item{input}{Input data}
