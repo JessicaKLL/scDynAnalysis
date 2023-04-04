@@ -8,5 +8,5 @@ Description: Extract, analyze and visualize the immune response dynamics
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Imports: rsample, randomForest, ggplot2, corrr, tidymodels, tibble, dplyr, reshape2, caret, Seurat, tibble, pheatmap, viridis, ggraph, igraph, rpart, rpart.plot
+Imports: rsample, randomForest, ggplot2, corrr, tidymodels, tibble, dplyr, reshape2, caret, Seurat, tibble, pheatmap, viridis, ggraph, igraph, rpart, rpart.plot, tidyr
 RoxygenNote: 7.2.3
