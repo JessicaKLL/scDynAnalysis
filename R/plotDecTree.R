@@ -16,7 +16,7 @@
 #'
 #' @import rpart
 #' @import rpart.plot
-#' @import randomforest
+#' @import randomForest
 #' @import dplyr
 #' @import ggraph
 #' @import igraph
