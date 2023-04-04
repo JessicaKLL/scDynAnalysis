@@ -14,7 +14,6 @@
 #' @export
 #' 
 
-
 Within_variance<-function(data1,data2,n=100,perc=0.1){
   Output_list<-list()
 
@@ -27,11 +26,11 @@ Within_variance<-function(data1,data2,n=100,perc=0.1){
   }
 
   Output_df<- Reduce(function(x, y) merge(x, y, all=TRUE), Output_list)
+  head(Output_df)
 
-  Wilcoxon<-pairwise.wilcox.test(ADT_Day0_Day2_corr_df$Correlation,
-                                             ADT_Day0_Day2_corr_df$Iteration, p.adjust.method="holm")
+  Wilcoxon<-pairwise.wilcox.test(Output_df$Correlation.corr,
+                                             Output_df$Iteration, p.adjust.method="holm")
   Wilcoxon<-broom::tidy(Wilcoxon)
 
   return(Wilcoxon)
 }
-

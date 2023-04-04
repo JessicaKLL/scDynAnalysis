@@ -19,17 +19,15 @@
 
 sub_sampling2<-function(Freq,data){
   nested_data<- data %>%
-    rownames_to_column('cell') %>%
     group_by(cell_type) %>%
     nest() %>%
     ungroup() %>%
     mutate(n=c(Freq$Freq))
   sampled_data<-nested_data %>%
-    mutate(samp=map2(data,n,sample_n))
+    mutate(samp=map2(data,n,sample_n,replace=TRUE))
   sampled_data<-sampled_data %>%
     select(-data) %>%
-    unnest(samp) %>%
-    column_to_rownames('cell')
+    unnest(samp)
   sampled_data$n<-NULL
   return(sampled_data)
 }

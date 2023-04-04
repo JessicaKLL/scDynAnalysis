@@ -14,7 +14,7 @@
 #'
 #' @export
 
-iter_corr<-function(data1,data2,n=100,decreasing=TRUE,perc=0.3){
+iter_corr<-function(data1,data2,n=100,decreasing=TRUE,perc=0.1){
   output<-list()
   for (i in c(1:n)){
     correlation_i<-calc_correlation(data1,data2,perc=perc)

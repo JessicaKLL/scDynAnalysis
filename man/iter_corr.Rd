@@ -4,7 +4,7 @@
 \alias{iter_corr}
 \title{Iteration of random-subsets correlation matrix}
 \usage{
-iter_corr(data1, data2, n = 100, decreasing = TRUE, perc = 0.3)
+iter_corr(data1, data2, n = 100, decreasing = TRUE, perc = 0.1)
 }
 \arguments{
 \item{data1}{Time-point data.frame 1}
