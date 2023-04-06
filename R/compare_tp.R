@@ -27,7 +27,7 @@
 #'
 
 compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regression=T,main="",x="",y=""){
-
+  
   if (nrow(Data_1) != nrow(Data_2)){
     if (group){
       Data_1<-sub_sampling2(Freq,Data_1)
@@ -36,12 +36,13 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     else{
       Data_1<-Data_1[sample(nrow(Data_1), n), ]
       Data_2<-Data_2[sample(nrow(Data_2), n), ]
-      }
+    }
   }
-
   if (Regression){
-    plot(Data_1[,Feature],Data_2[,Feature],
-            pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
+    x<-Data_1[,Feature]
+    y<-Data_2[,Feature]
+    plot(x[[1]],y[[1]],
+         pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     abline(lm(Data_2[,Feature] ~ Data_1[,Feature]), col = 3, lwd = 3)
     legend("topright", legend=c(x, y),pch = c(16,16),
            col=c("orange", "purple"))
@@ -49,8 +50,10 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     return(p)
   }
   else{
-    plot(Data_1[,Feature],Data_2[,Feature],
-            pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
+    x<-Data_1[,Feature]
+    y<-Data_2[,Feature]
+    plot(x[[1]],y[[1]],
+         pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     legend("topright", legend=c(x, y),pch = c(16,16),
            col=c("orange", "purple"))
     p<-recordPlot()
