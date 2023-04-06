@@ -2,9 +2,10 @@
 
 export(Between_variance)
 export(Expr_Heatmap)
+export(FactFeat_Dyn)
 export(FactFeat_ExprPlot)
+export(FactFeat_ExprRegr)
 export(FactFeat_corr)
-export(Fact_Feat_Dyn)
 export(RandomForest)
 export(Within_variance)
 export(calc_correlation)

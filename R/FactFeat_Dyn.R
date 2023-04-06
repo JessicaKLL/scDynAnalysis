@@ -16,7 +16,7 @@
 #' @export
 #'
 
-Fact_Feat_Dyn<-function(data,Features){
+FactFeat_Dyn<-function(data,Features){
   data<-split(data,data$time_point)
   data_au<-list()
   for (i in 1:length(data)) {

@@ -14,7 +14,7 @@
 #' @export
 #'
 
-FactFeat_ExprPlot<-function(Feat_data, Fact_data, Features,y="Factor"){
+FactFeat_ExprRegr<-function(Feat_data, Fact_data, Features,y="Factor"){
   output_list<-list()
   for (i in 1:length(Features)) {
     plot(Feat_data[,Features[i]],Fact_data,
