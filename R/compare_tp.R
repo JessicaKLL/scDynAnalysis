@@ -39,9 +39,9 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     }
   }
   if (Regression){
-    x<-Data_1[,Feature]
-    y<-Data_2[,Feature]
-    plot(x[[1]],y[[1]],
+    Data_1<-Data_1[,Feature]
+    Data_2<-Data_2[,Feature]
+    plot(Data_1[[1]],Data_2[[1]],
          pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     abline(lm(Data_2[,Feature] ~ Data_1[,Feature]), col = 3, lwd = 3)
     legend("topright", legend=c(x, y),pch = c(16,16),
@@ -50,9 +50,9 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     return(p)
   }
   else{
-    x<-Data_1[,Feature]
-    y<-Data_2[,Feature]
-    plot(x[[1]],y[[1]],
+    Data_1<-Data_1[,Feature]
+    Data_2<-Data_2[,Feature]
+    plot(Data_1[[1]],Data_2[[1]],
          pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     legend("topright", legend=c(x, y),pch = c(16,16),
            col=c("orange", "purple"))
