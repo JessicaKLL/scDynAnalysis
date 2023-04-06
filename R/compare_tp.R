@@ -43,7 +43,7 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     Data_2<-Data_2[,Feature]
     plot(Data_1[[1]],Data_2[[1]],
          pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
-    abline(lm(Data_2[,Feature] ~ Data_1[,Feature]), col = 3, lwd = 3)
+    abline(lm(Data_2[[1]] ~ Data_1[[1]]), col = 3, lwd = 3)
     legend("topright", legend=c(x, y),pch = c(16,16),
            col=c("orange", "purple"))
     p<-recordPlot()
