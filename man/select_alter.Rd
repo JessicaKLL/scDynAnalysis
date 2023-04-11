@@ -4,13 +4,15 @@
 \alias{select_alter}
 \title{Select altered features}
 \usage{
-select_alter(data, Features)
+select_alter(data, Features, explicit = TRUE)
 }
 \arguments{
 \item{data}{A list containing the p-values of each feature between different time-points,
 this can be calculated the function Between_variance()}
 
 \item{Features}{Vector containing the names of the features}
+
+\item{explicit}{Explicit selection? If not, the selection will be general (Default=TRUE)}
 }
 \value{
 A vector of selected features
