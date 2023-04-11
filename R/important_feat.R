@@ -3,8 +3,9 @@
 #' This function selects n features by their importance calculated by the random forest model
 #'
 #' @param model The random forest model
+#' @param data The dataframe used to generate the model
 #' @param n The number of features that will be selected (Default=30)
-#' @param cell_num The number of cells
+#' @param feat_num The number of features
 #' @param Decrease In which order should the features be selected? Increasing or decreasing?
 #' (Default=TRUE)
 #' @param main The title of the feature importance plot
@@ -16,9 +17,10 @@
 #'
 #' @export
 
-important_feat<-function(model,n=30,cell_num,Decrease=TRUE,main=""){
+important_feat<-function(model,data,n=30,feat_num,Decrease=TRUE,main=""){
+  cell_num<-length(unique(data$cell_type))
   imp_data<-data.frame(model$importance[,1:cell_num])
-  features<-rownames(imp_data)
+  features<-colnames(data[,1:feat_num])
   cell_type<-colnames(imp_data)
   Importance<-as.vector(imp_data)
   imp_df<-data.frame(features,Importance)
@@ -39,5 +41,4 @@ important_feat<-function(model,n=30,cell_num,Decrease=TRUE,main=""){
   names(output_list)<-c("Selected","Feature_plot")
   return(output_list)
 }
-
 

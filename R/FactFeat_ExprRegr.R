@@ -26,6 +26,7 @@ FactFeat_ExprRegr<-function(Feat_data, Fact_data, Features,y="Factor"){
            col=c("orange", "purple"))
     p<-recordPlot()
     output_list[[i]]<-p
+    plot.new()
   }
   names(output_list)<-Features
   return(output_list)

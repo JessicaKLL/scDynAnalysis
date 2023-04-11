@@ -3,7 +3,7 @@
 #' This function generates a random forest model
 #'
 #' @param formula Formula describing the model to be fitted
-#' @param data The dataframe containing the variables in the model
+#' @param data A dataframe to generate the model
 #' @param split Train Test Split ? (Default=TRUE)
 #' @param ntree Number of trees to grow
 #' @param strata A variable that is used for stratified sampling (Default = NULL)
@@ -52,3 +52,4 @@ RandomForest<-function(formula,
     return(model)
   }
 }
+

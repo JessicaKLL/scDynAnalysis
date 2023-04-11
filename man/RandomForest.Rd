@@ -17,7 +17,7 @@ RandomForest(
 \arguments{
 \item{formula}{Formula describing the model to be fitted}
 
-\item{data}{The dataframe containing the variables in the model}
+\item{data}{A dataframe to generate the model}
 
 \item{split}{Train Test Split ? (Default=TRUE)}
 

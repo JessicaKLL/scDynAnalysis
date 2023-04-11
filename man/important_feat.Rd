@@ -4,14 +4,16 @@
 \alias{important_feat}
 \title{Important features}
 \usage{
-important_feat(model, n = 30, cell_num, Decrease = TRUE, main = "")
+important_feat(model, data, n = 30, feat_num, Decrease = TRUE, main = "")
 }
 \arguments{
 \item{model}{The random forest model}
 
+\item{data}{The dataframe used to generate the model}
+
 \item{n}{The number of features that will be selected (Default=30)}
 
-\item{cell_num}{The number of cells}
+\item{feat_num}{The number of features}
 
 \item{Decrease}{In which order should the features be selected? Increasing or decreasing?
 (Default=TRUE)}
