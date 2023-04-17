@@ -29,6 +29,7 @@ co_expr_net<-function(data,cut_corr=0.3,main){
     filter(abs(correlation) > cut_corr) %>%
     graph_from_data_frame(directed = FALSE)
   
+  library(ggraph)
   cor_net<-ggraph(graph_cors) +
     geom_edge_link(aes(edge_alpha = abs(correlation), color = correlation)) +
     guides(edge_alpha = "none", edge_width = "none") +
