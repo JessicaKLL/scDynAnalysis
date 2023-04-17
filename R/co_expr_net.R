@@ -23,14 +23,14 @@ co_expr_net<-function(data,cut_corr=0.3,main){
     correlate() %>%
     stretch()
   
-  colnames(tidy_cors)<-c("from","to","corr")
+  colnames(tidy_cors)<-c("from","to","correlation")
   
   graph_cors <- tidy_cors %>%
-    filter(abs(corr) > cut_corr) %>%
+    filter(abs(corr) > cut_correlation) %>%
     graph_from_data_frame(directed = FALSE)
   
   cor_net<-ggraph(graph_cors) +
-    geom_edge_link(aes(edge_alpha = abs(corr), color = corr)) +
+    geom_edge_link(aes(edge_alpha = abs(correlation), color = correlation)) +
     guides(edge_alpha = "none", edge_width = "none") +
     scale_edge_colour_gradientn(limits = c(-1, 1), colors = c("firebrick2", "dodgerblue2")) +
     geom_node_point(color = "white", size = 5) +
