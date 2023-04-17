@@ -26,7 +26,7 @@ co_expr_net<-function(data,cut_corr=0.3,main){
   colnames(tidy_cors)<-c("from","to","correlation")
   
   graph_cors <- tidy_cors %>%
-    filter(abs(correlation) > cut_correlation) %>%
+    filter(abs(correlation) > cut_corr) %>%
     graph_from_data_frame(directed = FALSE)
   
   cor_net<-ggraph(graph_cors) +
