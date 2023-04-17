@@ -17,15 +17,18 @@
 FactFeat_ExprRegr<-function(Feat_data, Fact_data, Features,y="Factor"){
   output_list<-list()
   for (i in 1:length(Features)) {
-    plot(Feat_data[,Features[i]],Fact_data,
+    xi<-scale_data(Feat_data[,Features[i]])
+    yi<-scale_data(Fact_data)
+    plot(xi,yi,
          pch=16,col=c("orange","purple"),main=paste0("Factor - ",Features[i]),
          xlab=paste0(Features[i]),
          ylab=y)
-    abline(lm(Fact_data ~ Feat_data[,Features[i]]), col = 3, lwd = 3)
+    abline(lm(yi ~ xi), col = 3, lwd = 3)
     legend("topright", legend=c(paste0(Features[i]), y),pch = c(16,16),
            col=c("orange", "purple"))
     p<-recordPlot()
     output_list[[i]]<-p
+    plot.new()
   }
   names(output_list)<-Features
   return(output_list)

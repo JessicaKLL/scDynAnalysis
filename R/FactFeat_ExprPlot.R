@@ -17,8 +17,8 @@
 FactFeat_ExprPlot<-function(Feat_data,Fact_data,Features){
   output_list<-list()
   for (i in 1:length(Features)) {
-    x<-Feat_data[,Features[i]]
-    y<-Fact_data
+    x<-scale_data(Feat_data[,Features[i]])
+    y<-scale_data(Fact_data)
     cell_type<-Feat_data$cell_type
     time_point<-Feat_data$time_point
     data<-data.frame(x,y,cell_type,time_point)
