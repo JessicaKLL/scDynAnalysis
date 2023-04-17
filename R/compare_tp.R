@@ -39,8 +39,8 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     }
   }
   if (Regression){
-    Data_1<-scale_data(Data_1[,Feature])
-    Data_2<-scale_data(Data_2[,Feature])
+    Data_1<-scale_data(Data_1[[Feature]])
+    Data_2<-scale_data(Data_2[[Feature]])
     plot(Data_1,Data_2,
          pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     abline(lm(Data_2 ~ Data_1), col = 3, lwd = 3)
@@ -50,8 +50,8 @@ compare_tp<-function(Data_1,Data_2,Feature="",n=100,group=FALSE,Freq=NULL,Regres
     return(p)
   }
   else{
-    Data_1<-scale_data(Data_1[,Feature])
-    Data_2<-scale_data(Data_2[,Feature])
+    Data_1<-scale_data(Data_1[[Feature]])
+    Data_2<-scale_data(Data_2[[Feature]])
     plot(Data_1,Data_2,
          pch=16,col=c("orange","purple"),main=main,xlab=x,ylab=y)
     legend("topright", legend=c(x, y),pch = c(16,16),
