@@ -48,14 +48,14 @@ FactFeat_Dyn<-function(data,Features,Fact_data,tp_explicit=TRUE){
   x$FeatFact
 
   if(tp_explicit){
-    p<-ggplot(x,aes(Cell,Feature,group=Features,col=Features,fill=Features))+geom_smooth()+
+    p<-ggplot(x,aes(Cell,Feature,group=Features,col=Features,fill=stage(Features, after_scale = alpha(fill, .05))))+geom_smooth()+
       theme(axis.text.x=element_blank(), axis.ticks.x = element_blank(), axis.line = element_line(),
             panel.grid = element_blank(),panel.background = element_blank())+
       facet_grid(~time_point)+labs(title = "Feature's dynamics",x="Cells",y="Features")
     return(p)
   }
   else{
-    p<-ggplot(x,aes(x=Cell,y=Feature,group=Features,col=Features,fill=Features))+geom_smooth()+
+    p<-ggplot(x,aes(x=Cell,y=Feature,group=Features,col=Features,fill=stage(Features, after_scale = alpha(fill, .05))))+geom_smooth()+
       theme(axis.text.x=element_blank(), axis.ticks.x = element_blank(), axis.line = element_line(),
             panel.grid = element_blank(),panel.background = element_blank())+
       labs(title = "Feature's dynamics",x="Cells",y="Features")
