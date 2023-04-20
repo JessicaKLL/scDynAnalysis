@@ -4,18 +4,22 @@
 \alias{FactFeat_Dyn}
 \title{Factor-Feature dynamics}
 \usage{
-FactFeat_Dyn(data, Features)
+FactFeat_Dyn(data, Features, Fact_data, tp_explicit = TRUE)
 }
 \arguments{
 \item{data}{Entire data.frame}
 
-\item{Features}{The selected features}
+\item{Features}{The selected features and the factor}
+
+\item{Fact_data}{Factor expression data}
+
+\item{tp_explicit}{Take into account time_points?}
 }
 \value{
 A plot representing the dynamic change of feature and
-factor expressions among time-points.
+factor expressions.
 }
 \description{
 This function generates a plot representing the dynamic change of feature and
-factor expressions among time-points.
+factor expressions.
 }

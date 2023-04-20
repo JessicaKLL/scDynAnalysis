@@ -1,40 +1,62 @@
 #' Factor-Feature dynamics
 #'
 #' This function generates a plot representing the dynamic change of feature and
-#' factor expressions among time-points.
+#' factor expressions.
 #'
 #' @param data Entire data.frame
-#' @param Features The selected features
+#' @param Features The selected features and the factor
+#' @param Fact_data Factor expression data
+#' @param tp_explicit Take into account time_points?
 #'
 #' @import ggplot2
-#' @import reshape2
+#' @import tidyverse
 #' @import tibble
 #'
 #' @return A plot representing the dynamic change of feature and
-#' factor expressions among time-points.
+#' factor expressions.
 #'
 #' @export
 #'
 
-FactFeat_Dyn<-function(data,Features){
-  data<-split(data,data$time_point)
-  data_au<-list()
-  for (i in 1:length(data)) {
-    data_au[[i]]<-data[[i]][,1:length(Features)]
-    data_au[[i]]$Factor<-data[[i]][,ncol(data[[i]])]
-    data_au[[i]]<-colMeans(data_au[[i]])
+FactFeat_Dyn<-function(data,Features,Fact_data,tp_explicit=TRUE){
+  df <- tibble::rownames_to_column(data, "cell")
+  df<-split(df,df$time_point)
+  df_au<-rbind(df[[1]],df[[2]])
+  for (i in 3:length(df)) {
+    df_au<-rbind(df_au,df[[i]])
   }
-  df<-cbind(data_au[[1]],data_au[[2]])
-  for (i in 3:length(data_au)) {
-    df<-cbind(df,data_au[[i]])
+  df<-df_au
+  x<-data.frame(df$cell,df[,Features[1]])
+  colnames(x)<-c("Cell","Feature")
+  x$time_point<-df$time_point
+  x$Features<-Features[1]
+  for (i in 2:length(Features)) {
+    x_i<-data.frame(df$cell,df[,Features[i]])
+    colnames(x_i)<-c("Cell","Feature")
+    x_i$time_point<-df$time_point
+    x_i$Features<-Features[i]
+    x<-rbind(x,x_i)
   }
-  colnames(df)<-names(data)
-  df<-data.frame(df)
-  df<-tibble::rownames_to_column(df,"Features")
-  df<-melt(df,id.vars="Features")
-  plot<-ggplot(df,aes(x=variable, y=value))+geom_smooth(aes(color=Features, group=Features))+
-    theme_minimal()+theme(legend.key = element_blank())+labs(x="Time-point",y="Expression",
-                                                             title="Dynamics feature-factor")
-  return(plot)
-}
+  x$FeatFact<-"Feature"
+  x_i<-data.frame(df$cell,Fact_data)
+  colnames(x_i)<-c("Cell","Feature")
+  x_i$time_point<-df$time_point
+  x_i$Features<-"FACTOR"
+  x_i$FeatFact<-"Factor"
+  Features<-append(Features,"FACTOR")
+  x<-rbind(x,x_i)
+  x$FeatFact
 
+  if(tp_explicit){
+    p<-ggplot(x,aes(Cell,Feature,group=Features,col=Features,fill=Features))+geom_smooth()+
+      theme(axis.text.x=element_blank(), axis.ticks.x = element_blank(), axis.line = element_line())+
+      facet_grid(~time_point)+labs(title = "Feature's dynamics",x="Features",y="Cells")
+    return(p)
+  }
+  else{
+    p<-ggplot(x,aes(x=Cell,y=Feature,group=Features,col=Features,fill=Features))+geom_smooth()+
+      theme(axis.text.x=element_blank(), axis.ticks.x = element_blank(), axis.line = element_line())+
+      labs(title = "Feature's dynamics",x="Features",y="Cells")
+    return(p)
+  }
+}

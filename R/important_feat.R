@@ -18,7 +18,7 @@
 
 important_feat<-function(model,data,n=30,Decrease=TRUE,main=""){
   cell_num<-length(unique(data$cell_type))
-  imp_data<-data.frame(model$importance[,1:cell_num])
+  imp_data<-data.frame(rf$RF_model$importance[,1:cell_num])
   feat_num<-nrow(imp_data)
   features<-colnames(data[,1:feat_num])
   cell_type<-colnames(imp_data)

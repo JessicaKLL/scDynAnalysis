@@ -16,21 +16,21 @@
 
 Within_variance<-function(data1,data2,n=100,perc=0.1){
   Output_list<-list()
-
+  
   z<-iter_corr(data1,data2,n=n,decreasing=F,perc=perc)
-
+  
   for (i in c(1:n)) {
     id<-rep(i,nrow(z[[i]]))
     x<-data.frame(Iteration=id,Correlation=z[[i]])
     Output_list[[i]]<-x
   }
-
+  
   Output_df<- Reduce(function(x, y) merge(x, y, all=TRUE), Output_list)
   head(Output_df)
-
+  
   Wilcoxon<-pairwise.wilcox.test(Output_df$Correlation.corr,
-                                             Output_df$Iteration, p.adjust.method="holm")
+                                 Output_df$Iteration, p.adjust.method="holm")
   Wilcoxon<-broom::tidy(Wilcoxon)
-
+  
   return(Wilcoxon)
 }
