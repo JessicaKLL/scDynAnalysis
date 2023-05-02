@@ -4,46 +4,22 @@
 \alias{compare_tp}
 \title{Feature expression between time-points}
 \usage{
-compare_tp(
-  Data_1,
-  Data_2,
-  Feature = "",
-  n = 100,
-  group = FALSE,
-  Freq = NULL,
-  Regression = T,
-  main = "",
-  x = "",
-  y = ""
-)
+compare_tp(Data, Cell_Type, Time_Step, Feature = "", main = "")
 }
 \arguments{
-\item{Data_1}{Data.frame at time-point x}
+\item{Data}{Data.frame of feature expressions}
 
-\item{Data_2}{Data.frame at time-point y}
+\item{Cell_Type}{Cell-type of each input cell}
+
+\item{Time_Step}{Time-point of each input cell.}
 
 \item{Feature}{The feature which expression will be plotted}
 
-\item{n}{The number of random selected cells (Default=100)}
-
-\item{group}{Do you want to set yourself the sampling frequency of each class?}
-
-\item{Freq}{Frequency of each class, in data.frame format (Var1=classes,Freq=Number of cells)}
-
-\item{Regression}{Do you want to plot also the regression line?}
-
 \item{main}{Title of plot}
-
-\item{x}{Name of x-axis}
-
-\item{y}{Name of y-axis}
 }
 \value{
-A plot comparing the expression of a feature at two time-points.
+A plot comparing the expression of a feature at different time-points.
 }
 \description{
-This function generates a plot comparing the expression of a feature at two time-points.
-If the size of the two data differ, bear in mind that the function will remove randomly
-some cells to equalize the dimensions, if you want to set yourself the sampling frequencies by class
-set "group" to true
+This function generates a plot comparing the expression of a feature at different time-points.
 }

@@ -4,22 +4,32 @@
 \alias{FactFeat_ExprRegr}
 \title{Factor-Feature expression regression}
 \usage{
-FactFeat_ExprRegr(Feat_data, Fact_data, Features, y = "Factor")
+FactFeat_ExprRegr(
+  Feat_data,
+  Fact_data,
+  Cell_Type,
+  Time_Step = NULL,
+  Feature = "",
+  main = ""
+)
 }
 \arguments{
 \item{Feat_data}{Data.frame of feature expressions}
 
 \item{Fact_data}{Data.frame of factor expression}
 
-\item{Features}{Vector of feature names}
+\item{Cell_Type}{Cell-type of each input cell}
 
-\item{y}{Name y-axis}
+\item{Time_Step}{Split the plot by time-points? If 'yes', input the time-point of each input cell.
+Otherwise, ignore this parameter.}
 
-\item{x}{Name x-axis}
+\item{Feature}{Which feature do you want to check?}
+
+\item{main}{The title of the plot}
 }
 \value{
-A list of plots
+A plot comparing the expression of the feature and the factor.
 }
 \description{
-This function generates a list of plots comparing each feature with the same factor
+This function generates a plot comparing a feature with a factor
 }
