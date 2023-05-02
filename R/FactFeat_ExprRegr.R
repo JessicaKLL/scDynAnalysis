@@ -1,34 +1,51 @@
 #' Factor-Feature expression regression
 #'
-#' This function generates a list of plots comparing each feature with the same factor
+#' This function generates a plot comparing a feature with a factor
 #'
 #' @param Feat_data Data.frame of feature expressions
 #' @param Fact_data Data.frame of factor expression
-#' @param Features Vector of feature names
-#' @param x Name x-axis
-#' @param y Name y-axis
+#' @param Cell_Type Cell-type of each input cell
+#' @param Time_Step Split the plot by time-points? If 'yes', input the time-point of each input cell.
+#' Otherwise, ignore this parameter.
+#' @param Feature Which feature do you want to check?
+#' @param main The title of the plot
 #'
-#'
-#' @return A list of plots
+#' @import ggplot2
+#' 
+#' @return A plot comparing the expression of the feature and the factor.
 #'
 #' @export
 #'
 
-FactFeat_ExprRegr<-function(Feat_data, Fact_data, Features,y="Factor"){
-  output_list<-list()
-  for (i in 1:length(Features)) {
-    xi<-scale_data(Feat_data[,Features[i]])
-    yi<-scale_data(Fact_data)
-    plot(xi,yi,
-         pch=16,col=c("orange","purple"),main=paste0("Factor - ",Features[i]),
-         xlab=paste0(Features[i]),
-         ylab=y)
-    abline(lm(yi ~ xi), col = 3, lwd = 3)
-    legend("topright", legend=c(paste0(Features[i]), y),pch = c(16,16),
-           col=c("orange", "purple"))
-    p<-recordPlot()
-    output_list[[i]]<-p
+FactFeat_ExprRegr<-function(Feat_data,Fact_data,Cell_Type,Time_Step=NULL,Feature="",main=""){
+  x<-data.frame(Feat_data[,Feature])
+  colnames(x)<-"Expression"
+  x$FeatFact<-Feature
+  x$cell_type<-Cell_Type
+  if(missing(Time_Step)){
+    y<-data.frame(Fact_data)
+    colnames(y)<-"Expression"
+    y$FeatFact<-"FACTOR"
+    y$cell_type<-Cell_Type
+    z<-rbind(x,y)
+    p<-ggplot(z,aes(x=cell_type,y=Expression,col=FeatFact))+geom_boxplot()+
+      theme_bw()+theme(axis.text.x = element_text(angle = 90))+
+      scale_color_manual(values = c("purple","orange"))+ggtitle(main)+
+      xlab("Cell Type")
+    return(p)
   }
-  names(output_list)<-Features
-  return(output_list)
+  else{
+    x$time_point<-Time_Step
+    y<-data.frame(Fact_data)
+    colnames(y)<-"Expression"
+    y$FeatFact<-"FACTOR"
+    y$cell_type<-Cell_Type
+    y$time_point<-Time_Step
+    z<-rbind(x,y)
+    p<-ggplot(z,aes(x=cell_type,y=Expression,col=FeatFact))+geom_boxplot()+facet_grid(~time_point)+
+      theme_bw()+theme(axis.text.x = element_text(angle = 90))+
+      scale_color_manual(values = c("purple","orange"))+ggtitle(main)+
+      xlab("Cell Type")
+    return(p)
+  }
 }
