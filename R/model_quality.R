@@ -28,7 +28,7 @@ model_quality<-function(model,test_set,real_output,main=""){
   plot<- confusion %>%
     ggplot(aes(x=Real,y=Predicted,fill=Perc)) +
     geom_tile()+scale_fill_viridis_c() + theme(axis.text.x = element_text(angle = 90)) +
-    geom_text(aes(label=round(Perc,3)))+
+    geom_text(aes(label=round(Perc,2)))+
     labs(title = paste0(main))
   output<-list()
   output[[1]]<-predicted_set
