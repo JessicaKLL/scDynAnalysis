@@ -5,6 +5,7 @@
 #' @param model The random forest model
 #' @param test_set Data which variable/factor/output is predicted by the model
 #' @param real_output The real variable/factor/output of the test data
+#' @param main The title of the plot
 #'
 #' @import caret
 #' @import dplyr
@@ -14,7 +15,7 @@
 #'
 #' @export
 
-model_quality<-function(model,test_set,real_output){
+model_quality<-function(model,test_set,real_output,main=""){
   predicted_set<-predict(model,newdata=test_set,type="response")
   predicted_set<-factor(predicted_set,levels(real_output))
   real<-as.data.frame(table(real_output))
@@ -28,7 +29,7 @@ model_quality<-function(model,test_set,real_output){
     ggplot(aes(x=Real,y=Predicted,fill=Perc)) +
     geom_tile()+scale_fill_viridis_c() + theme(axis.text.x = element_text(angle = 90)) +
     geom_text(aes(label=round(Perc,3)))+
-    labs(title = "Heatmap comparing predicted and real values")
+    labs(title = paste0(main))
   output<-list()
   output[[1]]<-predicted_set
   output[[2]]<-confusion_matrix
