@@ -25,6 +25,7 @@ model_quality<-function(model,test_set,real_output,main=""){
   confusion<-data.frame(m$table)
   confusion$perc<-confusion$Freq/real$Freq*100
   colnames(confusion)<-c("Predicted","Real","Count","Perc")
+  confusion[is.na(confusion$Perc),]$Perc<-0
   plot<- confusion %>%
     ggplot(aes(x=Real,y=Predicted,fill=Perc)) +
     geom_tile()+scale_fill_viridis_c() + theme(axis.text.x = element_text(angle = 90)) +
