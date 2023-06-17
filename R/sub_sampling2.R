@@ -18,6 +18,12 @@
 #'
 
 sub_sampling2<-function(Freq,data){
+  d_freq<-as.data.frame(table(data$cell_type))
+  for (i in 1:nrow(d_freq)) {
+    if(isTRUE(d_freq[i,]$Freq==0)){
+      Freq<-Freq[-i,]
+    }
+  }
   nested_data<- data %>%
     group_by(cell_type) %>%
     nest() %>%
