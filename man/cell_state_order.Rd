@@ -18,7 +18,7 @@ cell_state_order(data, root, cluster, feat_num, dist_method = "minkowski")
 \item{dist_method}{The distance method used to generate the distance matrix}
 }
 \value{
-A
+A vector with the ordered clusters
 }
 \description{
 This function orders the cell states inside one time point of the biological process based on the 
