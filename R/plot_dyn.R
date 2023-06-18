@@ -57,12 +57,13 @@ plot_dyn<-function(data,cluster,Features){
         df<-rbind(df,ind)
       }
     }
-    p<-ggplot(df,aes(Meta_cells,Gene,group=Patient,col=Patient))+
+    p<-ggplot(df,aes(Meta_cells,Gene,group=Individual,col=Individual))+
       geom_point(alpha=0.07)+geom_line(alpha=0.07)+
       geom_spline(size=1,spar = 0.7)+
       theme_classic()+theme(axis.text.x = element_blank())+ylab(paste0(Features[i]))+
-      labs(title = paste0(Features[i]," dynamics in different patients"))
+      labs(title = paste0(Features[i]," dynamics in different individuals"))
     Gene_dyn_Xpatient[[i]]<-p
   }
+  names(Gene_dyn_Xpatient)<-Features
   return(Gene_dyn_Xpatient)
 }
