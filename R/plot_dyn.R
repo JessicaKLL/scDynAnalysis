@@ -1,4 +1,4 @@
-#' Factor-Feature dynamics
+#' Feature dynamics per individuals
 #'
 #' This function generates a plot representing the dynamics of the expression of one feature in different patients
 #'
