@@ -19,17 +19,18 @@
 
 plot_dyn<-function(data,cluster,Features){
   Gene_dyn_Xpatient<-list()
+  p<-names(data)
   for (i in 1:length(Features)) {
-    p<-names(data)
     if(isTRUE(length(data)==1)){
-      ind1$order<-data[,cluster]
+      ind1<-as.data.frame(data[[i]][,Features[i]])
+      ind1$order<-data[[1]][,cluster]
       ind1$individual<-p[1]
       colnames(ind1)<-c("Feature","Meta_cells","Individual")
       df<-ind1
     }
     if(isTRUE(length(data)==2)){
       ind1<-as.data.frame(data[[i]][,Features[i]])
-      ind1$order<-data[,cluster]
+      ind1$order<-data[[i]][,cluster]
       ind1$individual<-p[1]
       colnames(ind1)<-c("Feature","Meta_cells","Individual")
       ind2<-as.data.frame(data[[i]][,Features[i]])
@@ -40,7 +41,7 @@ plot_dyn<-function(data,cluster,Features){
     }
     else{
       ind1<-as.data.frame(data[[i]][,Features[i]])
-      ind1$order<-data[,cluster]
+      ind1$order<-data[[i]][,cluster]
       ind1$individual<-p[1]
       colnames(ind1)<-c("Feature","Meta_cells","Individual")
       ind2<-as.data.frame(data[[i]][,Features[i]])
@@ -50,7 +51,7 @@ plot_dyn<-function(data,cluster,Features){
       df<-rbind(ind1,ind2)
       for (i in 3:length(data)) {
         ind<-as.data.frame(data[[i]][,Features[i]])
-        ind$order<-data[,cluster]
+        ind$order<-data[[i]][,cluster]
         ind$individual<-p[i]
         colnames(ind)<-c("Feature","Meta_cells","Individual")
         df<-rbind(df,ind)
