@@ -30,22 +30,22 @@ plot_dyn<-function(data,cluster,Features){
     }
     if(isTRUE(length(data)==2)){
       ind1<-as.data.frame(data[[i]][,Features[i]])
-      ind1$order<-data[[i]][,cluster]
+      ind1$order<-data[[2]][,cluster]
       ind1$individual<-p[1]
       colnames(ind1)<-c("Feature","Meta_cells","Individual")
       ind2<-as.data.frame(data[[i]][,Features[i]])
-      ind2$order<-data[,cluster]
+      ind2$order<-data[[2]][,cluster]
       ind2$individual<-p[2]
       colnames(ind2)<-c("Feature","Meta_cells","Individual")
       df<-rbind(ind1,ind2)
     }
     else{
       ind1<-as.data.frame(data[[i]][,Features[i]])
-      ind1$order<-data[[i]][,cluster]
+      ind1$order<-data[[1]][,cluster]
       ind1$individual<-p[1]
       colnames(ind1)<-c("Feature","Meta_cells","Individual")
       ind2<-as.data.frame(data[[i]][,Features[i]])
-      ind2$order<-data[,cluster]
+      ind2$order<-data[[2]][,cluster]
       ind2$individual<-p[2]
       colnames(ind2)<-c("Feature","Meta_cells","Individual")
       df<-rbind(ind1,ind2)
