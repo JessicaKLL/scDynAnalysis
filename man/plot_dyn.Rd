@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_dyn.R
 \name{plot_dyn}
 \alias{plot_dyn}
-\title{Factor-Feature dynamics}
+\title{Feature dynamics per individuals}
 \usage{
 plot_dyn(data, cluster, Features)
 }
