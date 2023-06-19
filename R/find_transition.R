@@ -14,7 +14,7 @@
 
 find_transition<-function(data,cluster,feat_num){
   n<-split(data,data$time_point)
-  n<-rbind(n$IP,n$Peak)
+  n<-rbind(n[[1]],n[[2]])
   CL_G<-data.frame(n[,1:feat_num])
   CL_G<-as.data.frame(t(CL_G))
   colnames(CL_G)<-n[,cluster]
