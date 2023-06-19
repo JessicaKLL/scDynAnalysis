@@ -15,7 +15,7 @@ Between_variance<-function(data, Features, Time_Points){
   list_feat<-list()
   for (i in 1:n) {
     x<-Time_Points
-    y<-c(data[,i])
+    y<-c(data[,Features[i]])
     list_feat[[i]]<-data.frame(x,y)
     colnames(list_feat[[i]])<-c("Time_Point","data")
   }
