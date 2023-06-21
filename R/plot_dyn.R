@@ -21,7 +21,5 @@ plot_dyn<-function(df){
       geom_spline(size=1,spar = 0.7)+
       theme_classic()+theme(axis.text.x = element_blank())+ylab(paste0(Features[i]))+
       labs(title = paste0(Features[i]))
-    Gene_dyn_Xpatient[[i]]<-p
-  }
-  return(Gene_dyn_Xpatient)
+  return(p)
 }
