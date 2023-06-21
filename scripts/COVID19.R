@@ -635,27 +635,27 @@ for (i in 1:length(Features)) {
   p1<-as.data.frame(ordered_donors_new_df[[1]][,Features[i]])
   p1$order<-ordered_donors_new_df[[1]]$clusters
   p1$donor<-"DonorA"
-  names(p1)<-c("Gene","Meta_cells","donor")
+  names(p1)<-c("Gene","Meta_cells","Individual")
   p2<-as.data.frame(ordered_donors_new_df[[2]][,Features[i]])
   p2$order<-ordered_donors_new_df[[2]]$clusters
   p2$donor<-"DonorB"
-  names(p2)<-c("Gene","Meta_cells","donor")
+  names(p2)<-c("Gene","Meta_cells","Individual")
   p3<-as.data.frame(ordered_donors_new_df[[3]][,Features[i]])
   p3$order<-ordered_donors_new_df[[3]]$clusters
   p3$donor<-"DonorE"
-  names(p3)<-c("Gene","Meta_cells","donor")
+  names(p3)<-c("Gene","Meta_cells","Individual")
   p4<-as.data.frame(ordered_donors_new_df[[4]][,Features[i]])
   p4$order<-ordered_donors_new_df[[4]]$clusters
   p4$donor<-"DonorF"
-  names(p4)<-c("Gene","Meta_cells","donor")
+  names(p4)<-c("Gene","Meta_cells","Individual")
   p5<-as.data.frame(ordered_donors_new_df[[5]][,Features[i]])
   p5$order<-ordered_donors_new_df[[5]]$clusters
   p5$donor<-"DonorJ"
-  names(p5)<-c("Gene","Meta_cells","donor")
+  names(p5)<-c("Gene","Meta_cells","Individual")
   p6<-as.data.frame(ordered_donors_new_df[[6]][,Features[i]])
   p6$order<-ordered_donors_new_df[[6]]$clusters
   p6$donor<-"DonorM"
-  names(p6)<-c("Gene","Meta_cells","donor")
+  names(p6)<-c("Gene","Meta_cells","Individual")
   df<-rbind(p1,p2)
   df<-rbind(df,p3)
   df<-rbind(df,p4)
@@ -664,6 +664,8 @@ for (i in 1:length(Features)) {
   df$Meta_cells <- factor(df$Meta_cells, levels=unique(df$Meta_cells))
   df$Patient<-as.factor(df$donor)
   p<-plot_dyn(df)+
+      theme_classic()+theme(axis.text.x = element_blank())+ylab(paste0(Features[i]))+
+      labs(title = paste0(Features[i]))+
     geom_vline(xintercept = c(100), linetype=2, size = 0.3)+
     geom_vline(xintercept = c(200), linetype=2, size = 0.3)+
     geom_vline(xintercept = c(300), linetype=2, size = 0.3)+
