@@ -412,30 +412,32 @@ for (i in 1:length(Features)) {
   p1<-as.data.frame(gd_patients_new_P4$Patient1[,Features[1]])
   p1$orP3r<-gd_patients_new_P4$Patient1$clusters
   p1$Patient<-"Patient1"
-  names(p1)<-c("Gene","Meta_cells","Patient")
+  names(p1)<-c("Gene","Meta_cells","Individual")
   p2<-as.data.frame(gd_patients_new_P4$Patient2[,Features[i]])
   p2$orP3r<-gd_patients_new_P4$Patient1$clusters
   p2$Patient<-"Patient2"
-  names(p2)<-c("Gene","Meta_cells","Patient")
+  names(p2)<-c("Gene","Meta_cells","Individual")
   p3<-as.data.frame(gd_patients_new_P4$Patient3[,Features[i]])
   p3$orP3r<-gd_patients_new_P4$Patient1$clusters
   p3$Patient<-"Patient3"
-  names(p3)<-c("Gene","Meta_cells","Patient")
+  names(p3)<-c("Gene","Meta_cells","Individual")
   p4<-as.data.frame(gd_patients_new_P4$Patient4[,Features[i]])
   p4$orP3r<-gd_patients_new_P4$Patient1$clusters
   p4$Patient<-"Patient4"
-  names(p4)<-c("Gene","Meta_cells","Patient")
+  names(p4)<-c("Gene","Meta_cells","Individual")
   p5<-as.data.frame(gd_patients_new_P4$Patient5[,Features[i]])
   p5$orP3r<-gd_patients_new_P4$Patient1$clusters
   p5$Patient<-"Patient5"
-  names(p5)<-c("Gene","Meta_cells","Patient")
-  P4<-rbind(p1,p2)
-  P4<-rbind(P4,p3)
-  P4<-rbind(P4,p4)
-  P4<-rbind(P4,p5)
-  P4$Meta_cells <- factor(P4$Meta_cells, levels=unique(P4$Meta_cells))
-  P4$Patient<-as.factor(P4$Patient)
-  p<-plot_dyn(P4)+
+  names(p5)<-c("Gene","Meta_cells","Individual")
+  df<-rbind(p1,p2)
+  df<-rbind(P4,p3)
+  df<-rbind(P4,p4)
+  df<-rbind(P4,p5)
+  df$Meta_cells <- factor(df$Meta_cells, levels=unique(df$Meta_cells))
+  df$Patient<-as.factor(df$Patient)
+  p<-plot_dyn(df)+
+      theme_classic()+theme(axis.text.x = element_blank())+ylab(paste0(Features[i]))+
+      labs(title = paste0(Features[i]))+
     geom_vline(xintercept = c(200), linetype=2, size = 0.5)+
     geom_text(aes(x=100, label="\nIP", y=10), colour="black") +
     geom_text(aes(x=300, label="\nPeak", y=10), colour="black")+
