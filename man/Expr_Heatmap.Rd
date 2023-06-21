@@ -12,9 +12,9 @@ Expr_Heatmap(data, Features)
 \item{Features}{The selected features}
 }
 \value{
-A list containing the heatmaps
+A heatmap
 }
 \description{
-This function plots several heatmaps representing the expression of the genes in
-different cells at different time-points, taking into account the cell-type.
+This function plots a heatmap representing the expression of the genes in
+different cells at different time-points.
 }
