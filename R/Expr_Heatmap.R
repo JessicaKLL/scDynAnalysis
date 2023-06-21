@@ -1,7 +1,7 @@
 #' Expression heatmap
 #'
-#' This function plots several heatmaps representing the expression of the genes in
-#' different cells at different time-points, taking into account the cell-type.
+#' This function plots a heatmaps representing the expression of the genes in
+#' different cells at different time-points.
 #'
 #' @param data Entire data.frame
 #' @param Features The selected features
