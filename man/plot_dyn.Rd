@@ -4,14 +4,11 @@
 \alias{plot_dyn}
 \title{Feature dynamics per individuals}
 \usage{
-plot_dyn(data, cluster, Features)
+plot_dyn(data)
 }
 \arguments{
-\item{data}{List of data splitted by individuals}
+\item{data}{Data}
 
-\item{cluster}{Name of the cluster column}
-
-\item{Features}{The selected features}
 }
 \value{
 A plot representing the dynamic change of feature and
