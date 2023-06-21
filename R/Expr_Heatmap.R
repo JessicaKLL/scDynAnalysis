@@ -16,7 +16,6 @@
 #'
 
 Expr_Heatmap<-function(data, Features){
-  Expr_Heatmap<-function(data, Features,main){
     data_au<-data[,which(colnames(data) %in% Features)]
     data_au$time_point<-data$time_point
     n<-length(Features)
@@ -28,5 +27,4 @@ Expr_Heatmap<-function(data, Features){
     output<-pheatmap(x,cluster_rows=F,cluster_cols=F,show_colnames=F,show_rownames = T,
                      annotation_col=cluster,color=turbo(100),fontsize=12,main = main)
     return(output)
-  }
 }
