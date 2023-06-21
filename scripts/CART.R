@@ -14,61 +14,56 @@ RF_P1<-list()
 for (i in 1:4) {
   RF_P1[[i]]<-RandomForest(as.factor(cell_type)~.,data=P1[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
-RF_DB<-list()
+RF_P2<-list()
 for (i in 1:4) {
-  RF_DB[[i]]<-RandomForest(as.factor(cell_type)~.,data=DB[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
+  RF_P2[[i]]<-RandomForest(as.factor(cell_type)~.,data=P2[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
-RF_DE<-list()
+RF_P3<-list()
 for (i in 1:4) {
-  RF_DE[[i]]<-RandomForest(as.factor(cell_type)~.,data=DE[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
+  RF_P3[[i]]<-RandomForest(as.factor(cell_type)~.,data=P3[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
-RF_DF<-list()
+RF_P4<-list()
 for (i in 1:4) {
-  RF_DF[[i]]<-RandomForest(as.factor(cell_type)~.,data=DF[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
+  RF_P4[[i]]<-RandomForest(as.factor(cell_type)~.,data=P4[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
-RF_DJ<-list()
+RF_P5<-list()
 for (i in 1:4) {
-  RF_DJ[[i]]<-RandomForest(as.factor(cell_type)~.,data=DJ[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
+  RF_P5[[i]]<-RandomForest(as.factor(cell_type)~.,data=P5[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 
 #Quality check
 
 P1_quality<-list()
 for (i in 1:length(RF_P1)) {
-  P1_quality[[i]]<-model_quality(RF_P1[[i]]$RF_model,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
+  P1_quality[[i]]<-moP3l_quality(RF_P1[[i]]$RF_moP3l,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
 }
 names(P1_quality)<-names(P1)
-DB_quality<-list()
-for (i in 1:length(RF_DB)) {
-  DB_quality[[i]]<-model_quality(RF_DB[[i]]$RF_model,RF_DB[[i]]$Test_Set,RF_DB[[i]]$Test_Set$cell_type)
+P2_quality<-list()
+for (i in 1:length(RF_P2)) {
+  P2_quality[[i]]<-moP3l_quality(RF_P2[[i]]$RF_moP3l,RF_P2[[i]]$Test_Set,RF_P2[[i]]$Test_Set$cell_type)
 }
-names(DB_quality)<-names(DB)
-DE_quality<-list()
-for (i in 1:length(RF_DE)) {
-  DE_quality[[i]]<-model_quality(RF_DE[[i]]$RF_model,RF_DE[[i]]$Test_Set,RF_DE[[i]]$Test_Set$cell_type)
+names(P2_quality)<-names(P2)
+P3_quality<-list()
+for (i in 1:length(RF_P3)) {
+  P3_quality[[i]]<-moP3l_quality(RF_P3[[i]]$RF_moP3l,RF_P3[[i]]$Test_Set,RF_P3[[i]]$Test_Set$cell_type)
 }
-names(DE_quality)<-names(DE)
-DF_quality<-list()
-for (i in 1:length(RF_DF)) {
-  DF_quality[[i]]<-model_quality(RF_DF[[i]]$RF_model,RF_DF[[i]]$Test_Set,RF_DF[[i]]$Test_Set$cell_type)
+names(P3_quality)<-names(P3)
+P4_quality<-list()
+for (i in 1:length(RF_P4)) {
+  P4_quality[[i]]<-moP3l_quality(RF_P4[[i]]$RF_moP3l,RF_P4[[i]]$Test_Set,RF_P4[[i]]$Test_Set$cell_type)
 }
-names(DF_quality)<-names(DF)
-DJ_quality<-list()
-for (i in 1:length(RF_DJ)) {
-  DJ_quality[[i]]<-model_quality(RF_DJ[[i]]$RF_model,RF_DJ[[i]]$Test_Set,RF_DJ[[i]]$Test_Set$cell_type)
+names(P4_quality)<-names(P4)
+P5_quality<-list()
+for (i in 1:length(RF_P5)) {
+  P5_quality[[i]]<-moP3l_quality(RF_P5[[i]]$RF_moP3l,RF_P5[[i]]$Test_Set,RF_P5[[i]]$Test_Set$cell_type)
 }
-names(DJ_quality)<-names(DJ)
-DM_quality<-list()
-for (i in 1:length(RF_DM)) {
-  DM_quality[[i]]<-model_quality(RF_DM[[i]]$RF_model,RF_DM[[i]]$Test_Set,RF_DM[[i]]$Test_Set$cell_type)
-}
-names(DM_quality)<-names(DM)
+names(P5_quality)<-names(P5)
 
 # Selection of relevant features
 
 P1_impFeat<-list()
 for (i in 1:length(P1)) {
-  P1_impFeat[[i]]<-important_feat(RF_P1[[i]]$RF_model,data=P1[[i]],n=30, main=paste0(names(P1)[i],": Important Features"))
+  P1_impFeat[[i]]<-important_feat(RF_P1[[i]]$RF_moP3l,data=P1[[i]],n=30, main=paste0(names(P1)[i],": Important Features"))
 }
 names(P1_impFeat)<-names(P1)
 P1_selected_feat<-c()
@@ -82,75 +77,75 @@ for (x in 1:length(P1_impFeat)) {
     }
   }
 }
-DB_impFeat<-list()
-for (i in 1:length(DB)) {
-  DB_impFeat[[i]]<-important_feat(RF_DB[[i]]$RF_model,data=DB[[i]],n=30, main=paste0(names(DB)[i],": Important Features"))
+P2_impFeat<-list()
+for (i in 1:length(P2)) {
+  P2_impFeat[[i]]<-important_feat(RF_P2[[i]]$RF_moP3l,data=P2[[i]],n=30, main=paste0(names(P2)[i],": Important Features"))
 }
-names(DB_impFeat)<-names(DB)
-DB_selected_feat<-c()
-for (x in 1:length(DB_impFeat)) {
-  for (y in 1:length(DB_impFeat[[x]]$Selected)) {
-    if (DB_impFeat[[x]]$Selected[y] %in% DB_selected_feat){
+names(P2_impFeat)<-names(P2)
+P2_selected_feat<-c()
+for (x in 1:length(P2_impFeat)) {
+  for (y in 1:length(P2_impFeat[[x]]$Selected)) {
+    if (P2_impFeat[[x]]$Selected[y] %in% P2_selected_feat){
       next
     }
     else{
-      DB_selected_feat<-append(DB_selected_feat,DB_impFeat[[x]]$Selected[y])
+      P2_selected_feat<-append(P2_selected_feat,P2_impFeat[[x]]$Selected[y])
     }
   }
 }
-DE_impFeat<-list()
-for (i in 1:length(DE)) {
-  DE_impFeat[[i]]<-important_feat(RF_DE[[i]]$RF_model,data=DE[[i]],n=30, main=paste0(names(DE)[i],": Important Features"))
+P3_impFeat<-list()
+for (i in 1:length(P3)) {
+  P3_impFeat[[i]]<-important_feat(RF_P3[[i]]$RF_moP3l,data=P3[[i]],n=30, main=paste0(names(P3)[i],": Important Features"))
 }
-names(DE_impFeat)<-names(DE)
-DE_selected_feat<-c()
-for (x in 1:length(DE_impFeat)) {
-  for (y in 1:length(DE_impFeat[[x]]$Selected)) {
-    if (DE_impFeat[[x]]$Selected[y] %in% DE_selected_feat){
+names(P3_impFeat)<-names(P3)
+P3_selected_feat<-c()
+for (x in 1:length(P3_impFeat)) {
+  for (y in 1:length(P3_impFeat[[x]]$Selected)) {
+    if (P3_impFeat[[x]]$Selected[y] %in% P3_selected_feat){
       next
     }
     else{
-      DE_selected_feat<-append(DE_selected_feat,DE_impFeat[[x]]$Selected[y])
+      P3_selected_feat<-append(P3_selected_feat,P3_impFeat[[x]]$Selected[y])
     }
   }
 }
-DF_impFeat<-list()
-for (i in 1:length(DF)) {
-  DF_impFeat[[i]]<-important_feat(RF_DF[[i]]$RF_model,data=DF[[i]],n=30, main=paste0(names(DF)[i],": Important Features"))
+P4_impFeat<-list()
+for (i in 1:length(P4)) {
+  P4_impFeat[[i]]<-important_feat(RF_P4[[i]]$RF_moP3l,data=P4[[i]],n=30, main=paste0(names(P4)[i],": Important Features"))
 }
-names(DF_impFeat)<-names(DF)
-DF_selected_feat<-c()
-for (x in 1:length(DF_impFeat)) {
-  for (y in 1:length(DF_impFeat[[x]]$Selected)) {
-    if (DF_impFeat[[x]]$Selected[y] %in% DF_selected_feat){
+names(P4_impFeat)<-names(P4)
+P4_selected_feat<-c()
+for (x in 1:length(P4_impFeat)) {
+  for (y in 1:length(P4_impFeat[[x]]$Selected)) {
+    if (P4_impFeat[[x]]$Selected[y] %in% P4_selected_feat){
       next
     }
     else{
-      DF_selected_feat<-append(DF_selected_feat,DF_impFeat[[x]]$Selected[y])
+      P4_selected_feat<-append(P4_selected_feat,P4_impFeat[[x]]$Selected[y])
     }
   }
 }
-DJ_impFeat<-list()
-for (i in 1:length(DJ)) {
-  DJ_impFeat[[i]]<-important_feat(RF_DJ[[i]]$RF_model,data=DJ[[i]],n=30, main=paste0(names(DJ)[i],": Important Features"))
+P5_impFeat<-list()
+for (i in 1:length(P5)) {
+  P5_impFeat[[i]]<-important_feat(RF_P5[[i]]$RF_moP3l,data=P5[[i]],n=30, main=paste0(names(P5)[i],": Important Features"))
 }
-names(DJ_impFeat)<-names(DJ)
-DJ_selected_feat<-c()
-for (x in 1:length(DJ_impFeat)) {
-  for (y in 1:length(DJ_impFeat[[x]]$Selected)) {
-    if (DJ_impFeat[[x]]$Selected[y] %in% DJ_selected_feat){
+names(P5_impFeat)<-names(P5)
+P5_selected_feat<-c()
+for (x in 1:length(P5_impFeat)) {
+  for (y in 1:length(P5_impFeat[[x]]$Selected)) {
+    if (P5_impFeat[[x]]$Selected[y] %in% P5_selected_feat){
       next
     }
     else{
-      DJ_selected_feat<-append(DJ_selected_feat,DJ_impFeat[[x]]$Selected[y])
+      P5_selected_feat<-append(P5_selected_feat,P5_impFeat[[x]]$Selected[y])
     }
   }
 }
 
-gamma_delta_genes<-c("GZMM","GZMK","GZMH","GZMB","GZMA","TYROBP","TRDV1","TRGV8","FCGR3A","KLRF1","NKG7","GNLY","PRF1","CCL4","ZFP36")
+gamma_P3lta_genes<-c("GZMM","GZMK","GZMH","GZMB","GZMA","TYROBP","TRDV1","TRGV8","FCGR3A","KLRF1","NKG7","GNLY","PRF1","CCL4","ZFP36")
 exhaustion_markers<-c("PDCD1","LAG3","HAVCR2","TIGIT","CTLA4","ENTPD1","CD244","EOMES","BATF")
 
-Selected_feat<-c(P1_selected_feat,P2_selected_feat,P3_selected_feat,P4_selected_feat,P5_selected_feat,gamma_delta_genes,exhaustion_markers)
+Selected_feat<-c(P1_selected_feat,P2_selected_feat,P3_selected_feat,P4_selected_feat,P5_selected_feat,gamma_P3lta_genes,exhaustion_markers)
 Selected_feat<-unique(Selected_feat)
 
 # First filtering
@@ -160,25 +155,25 @@ for (i in 1:length(P1)) {
   P1[[i]]<-P1[[i]][,which(colnames(P1[[i]]) %in% Selected_feat)]
   P1[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DB)) {
-  cell_type<-DB[[i]]$cell_type
-  DB[[i]]<-DB[[i]][,which(colnames(DB[[i]]) %in% Selected_feat)]
-  DB[[i]]$cell_type<-cell_type
+for (i in 1:length(P2)) {
+  cell_type<-P2[[i]]$cell_type
+  P2[[i]]<-P2[[i]][,which(colnames(P2[[i]]) %in% Selected_feat)]
+  P2[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DE)) {
-  cell_type<-DE[[i]]$cell_type
-  DE[[i]]<-DE[[i]][,which(colnames(DE[[i]]) %in% Selected_feat)]
-  DE[[i]]$cell_type<-cell_type
+for (i in 1:length(P3)) {
+  cell_type<-P3[[i]]$cell_type
+  P3[[i]]<-P3[[i]][,which(colnames(P3[[i]]) %in% Selected_feat)]
+  P3[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DF)) {
-  cell_type<-DF[[i]]$cell_type
-  DF[[i]]<-DF[[i]][,which(colnames(DF[[i]]) %in% Selected_feat)]
-  DF[[i]]$cell_type<-cell_type
+for (i in 1:length(P4)) {
+  cell_type<-P4[[i]]$cell_type
+  P4[[i]]<-P4[[i]][,which(colnames(P4[[i]]) %in% Selected_feat)]
+  P4[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DJ)) {
-  cell_type<-DJ[[i]]$cell_type
-  DJ[[i]]<-DJ[[i]][,which(colnames(DJ[[i]]) %in% Selected_feat)]
-  DJ[[i]]$cell_type<-cell_type
+for (i in 1:length(P5)) {
+  cell_type<-P5[[i]]$cell_type
+  P5[[i]]<-P5[[i]][,which(colnames(P5[[i]]) %in% Selected_feat)]
+  P5[[i]]$cell_type<-cell_type
 }
 
 # Technical variance signicance
@@ -254,25 +249,25 @@ for (i in 1:length(P1)) {
   P1[[i]]<-P1[[i]][,which(colnames(P1[[i]]) %in% pVal_alter)]
   P1[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DB)) {
-  cell_type<-DB[[i]]$cell_type
-  DB[[i]]<-DB[[i]][,which(colnames(DB[[i]]) %in% pVal_alter)]
-  DB[[i]]$cell_type<-cell_type
+for (i in 1:length(P2)) {
+  cell_type<-P2[[i]]$cell_type
+  P2[[i]]<-P2[[i]][,which(colnames(P2[[i]]) %in% pVal_alter)]
+  P2[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DE)) {
-  cell_type<-DE[[i]]$cell_type
-  DE[[i]]<-DE[[i]][,which(colnames(DE[[i]]) %in% pVal_alter)]
-  DE[[i]]$cell_type<-cell_type
+for (i in 1:length(P3)) {
+  cell_type<-P3[[i]]$cell_type
+  P3[[i]]<-P3[[i]][,which(colnames(P3[[i]]) %in% pVal_alter)]
+  P3[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DF)) {
-  cell_type<-DF[[i]]$cell_type
-  DF[[i]]<-DF[[i]][,which(colnames(DF[[i]]) %in% pVal_alter)]
-  DF[[i]]$cell_type<-cell_type
+for (i in 1:length(P4)) {
+  cell_type<-P4[[i]]$cell_type
+  P4[[i]]<-P4[[i]][,which(colnames(P4[[i]]) %in% pVal_alter)]
+  P4[[i]]$cell_type<-cell_type
 }
-for (i in 1:length(DJ)) {
-  cell_type<-DJ[[i]]$cell_type
-  DJ[[i]]<-DJ[[i]][,which(colnames(DJ[[i]]) %in% pVal_alter)]
-  DJ[[i]]$cell_type<-cell_type
+for (i in 1:length(P5)) {
+  cell_type<-P5[[i]]$cell_type
+  P5[[i]]<-P5[[i]][,which(colnames(P5[[i]]) %in% pVal_alter)]
+  P5[[i]]$cell_type<-cell_type
 }
 
 ## feature plots
@@ -317,7 +312,7 @@ tp[[5]]<-compare_tp(P5_complete,Cell_Type = P5_complete$cell_type,Time_Step = P5
 BATF<-ggarrange(plotlist = tp,nrow = 1,ncol = 5,common.legend = T,legend = "right",labels = c("P1","P2","P3","P4","P5"))
 BATF<-annotate_figure(BATF, top = text_grob("BATF",color = "black", face = "bold", size = 14))
 
-# cell state ordering
+# cell state orP3ring
 
 P1_IP_cell_type<-P1$IP$cell_type
 P1_peak_cell_type<-P1$Peak$cell_type
@@ -369,78 +364,78 @@ P3_hclust<-divHier(P3)
 P4_hclust<-divHier(P4)
 P5_hclust<-divHier(P5)
 
-P1_new_df<-gen_new_data(P1_hclust,method = "sum")
-P2_new_df<-gen_new_data(P2_hclust,method = "sum")
-P3_new_df<-gen_new_data(P3_hclust,method = "sum")
-P4_new_df<-gen_new_data(P4_hclust,method = "sum")
-P5_new_df<-gen_new_data(P5_hclust,method = "sum")
+P1_new_P4<-gen_new_data(P1_hclust,method = "sum")
+P2_new_P4<-gen_new_data(P2_hclust,method = "sum")
+P3_new_P4<-gen_new_data(P3_hclust,method = "sum")
+P4_new_P4<-gen_new_data(P4_hclust,method = "sum")
+P5_new_P4<-gen_new_data(P5_hclust,method = "sum")
 
-P1_corr<-find_transition(P1_new_df,cluster = "clusters",feat_num = feat_num)
-P2_corr<-find_transition(P2_new_df,cluster = "clusters",feat_num = feat_num)
-P3_corr<-find_transition(P3_new_df,cluster = "clusters",feat_num = feat_num)
-P4_corr<-find_transition(P4_new_df,cluster = "clusters",feat_num = feat_num)
-P5_corr<-find_transition(P5_new_df,cluster = "clusters",feat_num = feat_num)
+P1_corr<-find_transition(P1_new_P4,cluster = "clusters",feat_num = feat_num)
+P2_corr<-find_transition(P2_new_P4,cluster = "clusters",feat_num = feat_num)
+P3_corr<-find_transition(P3_new_P4,cluster = "clusters",feat_num = feat_num)
+P4_corr<-find_transition(P4_new_P4,cluster = "clusters",feat_num = feat_num)
+P5_corr<-find_transition(P5_new_P4,cluster = "clusters",feat_num = feat_num)
 
-P1_IP_order<-cell_state_order(P1_new_df[which(P1_new_df$time_point=="IP"),],root = P1_corr$Identical$x)
-P1_Peak_order<-cell_state_order(P1_new_df[which(P1_new_df$time_point=="Peak"),],root = P1_corr$Identical$y)
-P1_order<-c(rev(P1_IP_order),P1_Peak_order)
-P1_ordered_new_df<-P1_new_df[match(P1_order, P1_new_df$clusters),]
+P1_IP_orP3r<-cell_state_orP3r(P1_new_P4[which(P1_new_P4$time_point=="IP"),],root = P1_corr$IP3ntical$x)
+P1_Peak_orP3r<-cell_state_orP3r(P1_new_P4[which(P1_new_P4$time_point=="Peak"),],root = P1_corr$IP3ntical$y)
+P1_orP3r<-c(rev(P1_IP_orP3r),P1_Peak_orP3r)
+P1_orP3red_new_P4<-P1_new_P4[match(P1_orP3r, P1_new_P4$clusters),]
 
-P2_IP_order<-cell_state_order(P2_new_df[which(P2_new_df$time_point=="IP"),],root = P2_corr$Identical$x)
-P2_Peak_order<-cell_state_order(P2_new_df[which(P2_new_df$time_point=="Peak"),],root = P2_corr$Identical$y)
-P2_order<-c(rev(P2_IP_order),P2_Peak_order)
-P2_ordered_new_df<-P2_new_df[match(P2_order, P2_new_df$clusters),]
+P2_IP_orP3r<-cell_state_orP3r(P2_new_P4[which(P2_new_P4$time_point=="IP"),],root = P2_corr$IP3ntical$x)
+P2_Peak_orP3r<-cell_state_orP3r(P2_new_P4[which(P2_new_P4$time_point=="Peak"),],root = P2_corr$IP3ntical$y)
+P2_orP3r<-c(rev(P2_IP_orP3r),P2_Peak_orP3r)
+P2_orP3red_new_P4<-P2_new_P4[match(P2_orP3r, P2_new_P4$clusters),]
 
-P3_IP_order<-cell_state_order(P3_new_df[which(P3_new_df$time_point=="IP"),],root = P3_corr$Identical$x)
-P3_Peak_order<-cell_state_order(P3_new_df[which(P3_new_df$time_point=="Peak"),],root = P3_corr$Identical$y)
-P3_order<-c(rev(P3_IP_order),P3_Peak_order)
-P3_ordered_new_df<-P3_new_df[match(P3_order, P3_new_df$clusters),]
+P3_IP_orP3r<-cell_state_orP3r(P3_new_P4[which(P3_new_P4$time_point=="IP"),],root = P3_corr$IP3ntical$x)
+P3_Peak_orP3r<-cell_state_orP3r(P3_new_P4[which(P3_new_P4$time_point=="Peak"),],root = P3_corr$IP3ntical$y)
+P3_orP3r<-c(rev(P3_IP_orP3r),P3_Peak_orP3r)
+P3_orP3red_new_P4<-P3_new_P4[match(P3_orP3r, P3_new_P4$clusters),]
 
-P4_IP_order<-cell_state_order(P4_new_df[which(P4_new_df$time_point=="IP"),],root = P4_corr$Identical$x)
-P4_Peak_order<-cell_state_order(P4_new_df[which(P4_new_df$time_point=="Peak"),],root = P4_corr$Identical$y)
-P4_order<-c(rev(P4_IP_order),P4_Peak_order)
-P4_ordered_new_df<-P4_new_df[match(P4_order, P4_new_df$clusters),]
+P4_IP_orP3r<-cell_state_orP3r(P4_new_P4[which(P4_new_P4$time_point=="IP"),],root = P4_corr$IP3ntical$x)
+P4_Peak_orP3r<-cell_state_orP3r(P4_new_P4[which(P4_new_P4$time_point=="Peak"),],root = P4_corr$IP3ntical$y)
+P4_orP3r<-c(rev(P4_IP_orP3r),P4_Peak_orP3r)
+P4_orP3red_new_P4<-P4_new_P4[match(P4_orP3r, P4_new_P4$clusters),]
 
-P5_IP_order<-cell_state_order(P5_new_df[which(P5_new_df$time_point=="IP"),],root = P5_corr$Identical$x)
-P5_Peak_order<-cell_state_order(P5_new_df[which(P5_new_df$time_point=="Peak"),],root = P5_corr$Identical$y)
-P5_order<-c(rev(P5_IP_order),P5_Peak_order)
-P5_ordered_new_df<-P5_new_df[match(P5_order, P5_new_df$clusters),]
+P5_IP_orP3r<-cell_state_orP3r(P5_new_P4[which(P5_new_P4$time_point=="IP"),],root = P5_corr$IP3ntical$x)
+P5_Peak_orP3r<-cell_state_orP3r(P5_new_P4[which(P5_new_P4$time_point=="Peak"),],root = P5_corr$IP3ntical$y)
+P5_orP3r<-c(rev(P5_IP_orP3r),P5_Peak_orP3r)
+P5_orP3red_new_P4<-P5_new_P4[match(P5_orP3r, P5_new_P4$clusters),]
 
 # Dynamics
 
 ## spaghetti
-gd_donors_new_df<-list(Patient1=P1_ordered_new_df,Patient2=P2_ordered_new_df,Patient3=p3_ordered_new_df,
-                            Patient4=P4_ordered_new_df,Patient5=P5_ordered_new_df)
+gd_donors_new_P4<-list(Patient1=P1_orP3red_new_P4,Patient2=P2_orP3red_new_P4,Patient3=p3_orP3red_new_P4,
+                            Patient4=P4_orP3red_new_P4,Patient5=P5_orP3red_new_P4)
 Features<-pVal_alter
 Gene_dyn_Xpatient<-list()
 for (i in 1:length(Features)) {
-  p1<-as.data.frame(gd_patients_new_df$Patient1[,Features[1]])
-  p1$order<-gd_patients_new_df$Patient1$clusters
+  p1<-as.data.frame(gd_patients_new_P4$Patient1[,Features[1]])
+  p1$orP3r<-gd_patients_new_P4$Patient1$clusters
   p1$Patient<-"Patient1"
   names(p1)<-c("Gene","Meta_cells","Patient")
-  p2<-as.data.frame(gd_patients_new_df$Patient2[,Features[i]])
-  p2$order<-gd_patients_new_df$Patient1$clusters
+  p2<-as.data.frame(gd_patients_new_P4$Patient2[,Features[i]])
+  p2$orP3r<-gd_patients_new_P4$Patient1$clusters
   p2$Patient<-"Patient2"
   names(p2)<-c("Gene","Meta_cells","Patient")
-  p3<-as.data.frame(gd_patients_new_df$Patient3[,Features[i]])
-  p3$order<-gd_patients_new_df$Patient1$clusters
+  p3<-as.data.frame(gd_patients_new_P4$Patient3[,Features[i]])
+  p3$orP3r<-gd_patients_new_P4$Patient1$clusters
   p3$Patient<-"Patient3"
   names(p3)<-c("Gene","Meta_cells","Patient")
-  p4<-as.data.frame(gd_patients_new_df$Patient4[,Features[i]])
-  p4$order<-gd_patients_new_df$Patient1$clusters
+  p4<-as.data.frame(gd_patients_new_P4$Patient4[,Features[i]])
+  p4$orP3r<-gd_patients_new_P4$Patient1$clusters
   p4$Patient<-"Patient4"
   names(p4)<-c("Gene","Meta_cells","Patient")
-  p5<-as.data.frame(gd_patients_new_df$Patient5[,Features[i]])
-  p5$order<-gd_patients_new_df$Patient1$clusters
+  p5<-as.data.frame(gd_patients_new_P4$Patient5[,Features[i]])
+  p5$orP3r<-gd_patients_new_P4$Patient1$clusters
   p5$Patient<-"Patient5"
   names(p5)<-c("Gene","Meta_cells","Patient")
-  df<-rbind(p1,p2)
-  df<-rbind(df,p3)
-  df<-rbind(df,p4)
-  df<-rbind(df,p5)
-  df$Meta_cells <- factor(df$Meta_cells, levels=unique(df$Meta_cells))
-  df$Patient<-as.factor(df$Patient)
-  p<-plot_dyn(df)+
+  P4<-rbind(p1,p2)
+  P4<-rbind(P4,p3)
+  P4<-rbind(P4,p4)
+  P4<-rbind(P4,p5)
+  P4$Meta_cells <- factor(P4$Meta_cells, levels=unique(P4$Meta_cells))
+  P4$Patient<-as.factor(P4$Patient)
+  p<-plot_dyn(P4)+
     geom_vline(xintercept = c(200), linetype=2, size = 0.5)+
     geom_text(aes(x=100, label="\nIP", y=10), colour="black") +
     geom_text(aes(x=300, label="\nPeak", y=10), colour="black")+
@@ -455,11 +450,11 @@ names(Gene_dyn_Xpatient)<-Features
 ## heatmaps
 
 heatmaps<-list()
-heatmaps[[1]]<-Expr_Heatmap(P1_ordered_new_df,Features,main = "P1")
-heatmaps[[2]]<-Expr_Heatmap(P2_ordered_new_df,Features,main = "P2")
-heatmaps[[3]]<-Expr_Heatmap(P3_ordered_new_df,Features,main = "P3")
-heatmaps[[4]]<-Expr_Heatmap(P4_ordered_new_df,Features,main = "P4")
-heatmaps[[5]]<-Expr_Heatmap(P5_ordered_new_df,Features,main = "P5")
+heatmaps[[1]]<-Expr_Heatmap(P1_orP3red_new_P4,Features,main = "P1")
+heatmaps[[2]]<-Expr_Heatmap(P2_orP3red_new_P4,Features,main = "P2")
+heatmaps[[3]]<-Expr_Heatmap(P3_orP3red_new_P4,Features,main = "P3")
+heatmaps[[4]]<-Expr_Heatmap(P4_orP3red_new_P4,Features,main = "P4")
+heatmaps[[5]]<-Expr_Heatmap(P5_orP3red_new_P4,Features,main = "P5")
 
 # Forecasting
 
@@ -467,19 +462,19 @@ Features<-pVal_alter[-which(pVal_alter=="antigen")]
 
 pred_genes<-list()
 for (i in 1:length(Features)) {
-  output_1<-Cross_Validation_lstm(P1_ordered_new_df,Feature = Features[i],epochs = 1000) %>%
+  output_1<-Cross_Validation_lstm(P1_orP3red_new_P4,Feature = Features[i],epochs = 1000) %>%
     plot_prediction(alpha = 0.65) +
     theme(legend.position = "bottom")
-  output_2<-Cross_Validation_lstm(P2_ordered_new_df,Feature = Features[i],epochs = 1000) %>%
+  output_2<-Cross_Validation_lstm(P2_orP3red_new_P4,Feature = Features[i],epochs = 1000) %>%
     plot_prediction(alpha = 0.65) +
     theme(legend.position = "bottom")
-  output_3<-Cross_Validation_lstm(P3_ordered_new_df,Feature = Features[i],epochs = 1000) %>%
+  output_3<-Cross_Validation_lstm(P3_orP3red_new_P4,Feature = Features[i],epochs = 1000) %>%
     plot_prediction(alpha = 0.65) +
     theme(legend.position = "bottom")
-  output_4<-Cross_Validation_lstm(P4_ordered_new_df,Feature = Features[i],epochs = 1000) %>%
+  output_4<-Cross_Validation_lstm(P4_orP3red_new_P4,Feature = Features[i],epochs = 1000) %>%
     plot_prediction(alpha = 0.65) +
     theme(legend.position = "bottom")
-  output_5<-Cross_Validation_lstm(P5_ordered_new_df,Feature = Features[i],epochs = 1000) %>%
+  output_5<-Cross_Validation_lstm(P5_orP3red_new_P4,Feature = Features[i],epochs = 1000) %>%
     plot_prediction(alpha = 0.65) +
     theme(legend.position = "bottom")
   pt<-ggarrange(output_1 +   rremove("xlab")+rremove("ylab"), 
