@@ -4,10 +4,11 @@
 \alias{plot_dyn}
 \title{Feature dynamics per individuals}
 \usage{
-plot_dyn(data)
+plot_dyn(data,spar)
 }
 \arguments{
 \item{data}{Data}
+\item{spar}{Smoothing parameter}
 
 }
 \value{
