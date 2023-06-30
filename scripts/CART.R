@@ -35,27 +35,27 @@ for (i in 1:2) {
 
 P1_quality<-list()
 for (i in 1:length(RF_P1)) {
-  P1_quality[[i]]<-moP3l_quality(RF_P1[[i]]$RF_moP3l,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
+  P1_quality[[i]]<-model_quality(RF_P1[[i]]$RF_moP3l,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
 }
 names(P1_quality)<-names(P1)
 P2_quality<-list()
 for (i in 1:length(RF_P2)) {
-  P2_quality[[i]]<-moP3l_quality(RF_P2[[i]]$RF_moP3l,RF_P2[[i]]$Test_Set,RF_P2[[i]]$Test_Set$cell_type)
+  P2_quality[[i]]<-model_quality(RF_P2[[i]]$RF_moP3l,RF_P2[[i]]$Test_Set,RF_P2[[i]]$Test_Set$cell_type)
 }
 names(P2_quality)<-names(P2)
 P3_quality<-list()
 for (i in 1:length(RF_P3)) {
-  P3_quality[[i]]<-moP3l_quality(RF_P3[[i]]$RF_moP3l,RF_P3[[i]]$Test_Set,RF_P3[[i]]$Test_Set$cell_type)
+  P3_quality[[i]]<-model_quality(RF_P3[[i]]$RF_moP3l,RF_P3[[i]]$Test_Set,RF_P3[[i]]$Test_Set$cell_type)
 }
 names(P3_quality)<-names(P3)
 P4_quality<-list()
 for (i in 1:length(RF_P4)) {
-  P4_quality[[i]]<-moP3l_quality(RF_P4[[i]]$RF_moP3l,RF_P4[[i]]$Test_Set,RF_P4[[i]]$Test_Set$cell_type)
+  P4_quality[[i]]<-model_quality(RF_P4[[i]]$RF_moP3l,RF_P4[[i]]$Test_Set,RF_P4[[i]]$Test_Set$cell_type)
 }
 names(P4_quality)<-names(P4)
 P5_quality<-list()
 for (i in 1:length(RF_P5)) {
-  P5_quality[[i]]<-moP3l_quality(RF_P5[[i]]$RF_moP3l,RF_P5[[i]]$Test_Set,RF_P5[[i]]$Test_Set$cell_type)
+  P5_quality[[i]]<-model_quality(RF_P5[[i]]$RF_moP3l,RF_P5[[i]]$Test_Set,RF_P5[[i]]$Test_Set$cell_type)
 }
 names(P5_quality)<-names(P5)
 
