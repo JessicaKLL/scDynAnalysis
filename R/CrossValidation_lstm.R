@@ -4,6 +4,7 @@
 #' appropriate for the forecasting of future trends of the feature
 #' 
 #' @param data Your time step data
+#' @param Feature Interested feature
 #' @param periods_train Number of training time steps
 #' @param periods_test Number of testing time steps
 #' @param skip_span Distribute samples into n sets that span the entire historical data
@@ -28,7 +29,7 @@
 #' @export
 #' 
 
-CrossValidation_lstm<-function(data,periods_train=300,periods_test=100,
+CrossValidation_lstm<-function(data,Feature,periods_train=300,periods_test=100,
                                 skip_span=10,batch_size=50,tsteps=1,epochs=1000){
   
   tk<-Generate_time_series_featDF(data,Feature = Feature)
