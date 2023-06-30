@@ -5,6 +5,7 @@
 #'
 #' @param data Entire data.frame
 #' @param Features The selected features
+#' @param main Title of the plot
 #'
 #' @import pheatmap
 #' @import viridis
@@ -15,7 +16,7 @@
 #' @export
 #'
 
-Expr_Heatmap<-function(data, Features){
+Expr_Heatmap<-function(data, Features,main=""){
     data_au<-data[,which(colnames(data) %in% Features)]
     data_au$time_point<-data$time_point
     n<-length(Features)
