@@ -6,6 +6,7 @@
 \usage{
 CrossValidation_lstm(
   data,
+  Feature,
   periods_train = 300,
   periods_test = 100,
   skip_span = 10,
@@ -16,6 +17,8 @@ CrossValidation_lstm(
 }
 \arguments{
 \item{data}{Your time step data}
+
+\item{Feature}{Interested feature}
 
 \item{periods_train}{Number of training time steps}
 
