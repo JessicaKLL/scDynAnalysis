@@ -35,27 +35,27 @@ for (i in 1:2) {
 
 P1_quality<-list()
 for (i in 1:length(RF_P1)) {
-  P1_quality[[i]]<-model_quality(RF_P1[[i]]$RF_moP3l,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
+  P1_quality[[i]]<-model_quality(RF_P1[[i]]$RF_model,RF_P1[[i]]$Test_Set,RF_P1[[i]]$Test_Set$cell_type)
 }
 names(P1_quality)<-names(P1)
 P2_quality<-list()
 for (i in 1:length(RF_P2)) {
-  P2_quality[[i]]<-model_quality(RF_P2[[i]]$RF_moP3l,RF_P2[[i]]$Test_Set,RF_P2[[i]]$Test_Set$cell_type)
+  P2_quality[[i]]<-model_quality(RF_P2[[i]]$RF_model,RF_P2[[i]]$Test_Set,RF_P2[[i]]$Test_Set$cell_type)
 }
 names(P2_quality)<-names(P2)
 P3_quality<-list()
 for (i in 1:length(RF_P3)) {
-  P3_quality[[i]]<-model_quality(RF_P3[[i]]$RF_moP3l,RF_P3[[i]]$Test_Set,RF_P3[[i]]$Test_Set$cell_type)
+  P3_quality[[i]]<-model_quality(RF_P3[[i]]$RF_model,RF_P3[[i]]$Test_Set,RF_P3[[i]]$Test_Set$cell_type)
 }
 names(P3_quality)<-names(P3)
 P4_quality<-list()
 for (i in 1:length(RF_P4)) {
-  P4_quality[[i]]<-model_quality(RF_P4[[i]]$RF_moP3l,RF_P4[[i]]$Test_Set,RF_P4[[i]]$Test_Set$cell_type)
+  P4_quality[[i]]<-model_quality(RF_P4[[i]]$RF_model,RF_P4[[i]]$Test_Set,RF_P4[[i]]$Test_Set$cell_type)
 }
 names(P4_quality)<-names(P4)
 P5_quality<-list()
 for (i in 1:length(RF_P5)) {
-  P5_quality[[i]]<-model_quality(RF_P5[[i]]$RF_moP3l,RF_P5[[i]]$Test_Set,RF_P5[[i]]$Test_Set$cell_type)
+  P5_quality[[i]]<-model_quality(RF_P5[[i]]$RF_model,RF_P5[[i]]$Test_Set,RF_P5[[i]]$Test_Set$cell_type)
 }
 names(P5_quality)<-names(P5)
 
@@ -63,7 +63,7 @@ names(P5_quality)<-names(P5)
 
 P1_impFeat<-list()
 for (i in 1:length(P1)) {
-  P1_impFeat[[i]]<-important_feat(RF_P1[[i]]$RF_moP3l,data=P1[[i]],n=30, main=paste0(names(P1)[i],": Important Features"))
+  P1_impFeat[[i]]<-important_feat(RF_P1[[i]]$RF_model,data=P1[[i]],n=30, main=paste0(names(P1)[i],": Important Features"))
 }
 names(P1_impFeat)<-names(P1)
 P1_selected_feat<-c()
@@ -79,7 +79,7 @@ for (x in 1:length(P1_impFeat)) {
 }
 P2_impFeat<-list()
 for (i in 1:length(P2)) {
-  P2_impFeat[[i]]<-important_feat(RF_P2[[i]]$RF_moP3l,data=P2[[i]],n=30, main=paste0(names(P2)[i],": Important Features"))
+  P2_impFeat[[i]]<-important_feat(RF_P2[[i]]$RF_model,data=P2[[i]],n=30, main=paste0(names(P2)[i],": Important Features"))
 }
 names(P2_impFeat)<-names(P2)
 P2_selected_feat<-c()
@@ -95,7 +95,7 @@ for (x in 1:length(P2_impFeat)) {
 }
 P3_impFeat<-list()
 for (i in 1:length(P3)) {
-  P3_impFeat[[i]]<-important_feat(RF_P3[[i]]$RF_moP3l,data=P3[[i]],n=30, main=paste0(names(P3)[i],": Important Features"))
+  P3_impFeat[[i]]<-important_feat(RF_P3[[i]]$RF_model,data=P3[[i]],n=30, main=paste0(names(P3)[i],": Important Features"))
 }
 names(P3_impFeat)<-names(P3)
 P3_selected_feat<-c()
@@ -111,7 +111,7 @@ for (x in 1:length(P3_impFeat)) {
 }
 P4_impFeat<-list()
 for (i in 1:length(P4)) {
-  P4_impFeat[[i]]<-important_feat(RF_P4[[i]]$RF_moP3l,data=P4[[i]],n=30, main=paste0(names(P4)[i],": Important Features"))
+  P4_impFeat[[i]]<-important_feat(RF_P4[[i]]$RF_model,data=P4[[i]],n=30, main=paste0(names(P4)[i],": Important Features"))
 }
 names(P4_impFeat)<-names(P4)
 P4_selected_feat<-c()
@@ -127,7 +127,7 @@ for (x in 1:length(P4_impFeat)) {
 }
 P5_impFeat<-list()
 for (i in 1:length(P5)) {
-  P5_impFeat[[i]]<-important_feat(RF_P5[[i]]$RF_moP3l,data=P5[[i]],n=30, main=paste0(names(P5)[i],": Important Features"))
+  P5_impFeat[[i]]<-important_feat(RF_P5[[i]]$RF_model,data=P5[[i]],n=30, main=paste0(names(P5)[i],": Important Features"))
 }
 names(P5_impFeat)<-names(P5)
 P5_selected_feat<-c()
@@ -412,32 +412,30 @@ for (i in 1:length(Features)) {
   p1<-as.data.frame(gd_patients_new_P4$Patient1[,Features[1]])
   p1$orP3r<-gd_patients_new_P4$Patient1$clusters
   p1$Patient<-"Patient1"
-  names(p1)<-c("Gene","Meta_cells","Individual")
+  names(p1)<-c("Gene","Meta_cells","Patient")
   p2<-as.data.frame(gd_patients_new_P4$Patient2[,Features[i]])
   p2$orP3r<-gd_patients_new_P4$Patient1$clusters
   p2$Patient<-"Patient2"
-  names(p2)<-c("Gene","Meta_cells","Individual")
+  names(p2)<-c("Gene","Meta_cells","Patient")
   p3<-as.data.frame(gd_patients_new_P4$Patient3[,Features[i]])
   p3$orP3r<-gd_patients_new_P4$Patient1$clusters
   p3$Patient<-"Patient3"
-  names(p3)<-c("Gene","Meta_cells","Individual")
+  names(p3)<-c("Gene","Meta_cells","Patient")
   p4<-as.data.frame(gd_patients_new_P4$Patient4[,Features[i]])
   p4$orP3r<-gd_patients_new_P4$Patient1$clusters
   p4$Patient<-"Patient4"
-  names(p4)<-c("Gene","Meta_cells","Individual")
+  names(p4)<-c("Gene","Meta_cells","Patient")
   p5<-as.data.frame(gd_patients_new_P4$Patient5[,Features[i]])
   p5$orP3r<-gd_patients_new_P4$Patient1$clusters
   p5$Patient<-"Patient5"
-  names(p5)<-c("Gene","Meta_cells","Individual")
-  df<-rbind(p1,p2)
-  df<-rbind(P4,p3)
-  df<-rbind(P4,p4)
-  df<-rbind(P4,p5)
-  df$Meta_cells <- factor(df$Meta_cells, levels=unique(df$Meta_cells))
-  df$Patient<-as.factor(df$Patient)
-  p<-plot_dyn(df)+
-      theme_classic()+theme(axis.text.x = element_blank())+ylab(paste0(Features[i]))+
-      labs(title = paste0(Features[i]))+
+  names(p5)<-c("Gene","Meta_cells","Patient")
+  P4<-rbind(p1,p2)
+  P4<-rbind(P4,p3)
+  P4<-rbind(P4,p4)
+  P4<-rbind(P4,p5)
+  P4$Meta_cells <- factor(P4$Meta_cells, levels=unique(P4$Meta_cells))
+  P4$Patient<-as.factor(P4$Patient)
+  p<-plot_dyn(P4)+
     geom_vline(xintercept = c(200), linetype=2, size = 0.5)+
     geom_text(aes(x=100, label="\nIP", y=10), colour="black") +
     geom_text(aes(x=300, label="\nPeak", y=10), colour="black")+
