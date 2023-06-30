@@ -4,12 +4,10 @@
 \alias{Gen_tk_data}
 \title{Generate time step data}
 \usage{
-Gen_tk_data(data, cluster, Feature)
+Gen_tk_data(data, Feature)
 }
 \arguments{
 \item{data}{Your data}
-
-\item{cluster}{The name of the cluster column}
 
 \item{Feature}{Your selected feature}
 }
