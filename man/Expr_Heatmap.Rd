@@ -8,7 +8,7 @@ Expr_Heatmap(data, Features)
 }
 \arguments{
 \item{data}{Entire data.frame}
-
+\item{main}{Title of the plot}
 \item{Features}{The selected features}
 }
 \value{
