@@ -32,7 +32,7 @@
 CrossValidation_lstm<-function(data,Feature,periods_train=300,periods_test=100,
                                 skip_span=10,batch_size=50,tsteps=1,epochs=1000){
   
-  tk<-Gen_tk_data(data,Feature = Feature)
+  tk<-Gen_tk_data(data,cluster="clusters",Feature = Feature)
   
   rolling_origin_resamples <- rolling_origin(
     tk,
