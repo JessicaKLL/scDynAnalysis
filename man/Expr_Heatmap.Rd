@@ -4,7 +4,7 @@
 \alias{Expr_Heatmap}
 \title{Expression heatmap}
 \usage{
-Expr_Heatmap(data, Features)
+Expr_Heatmap(data, main, Features)
 }
 \arguments{
 \item{data}{Entire data.frame}
