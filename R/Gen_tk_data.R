@@ -3,7 +3,6 @@
 #' This function takes your longitudinal dataframe and generates a time step dataframe for a selected feature
 #' 
 #' @param data Your data
-#' @param cluster The name of the cluster column
 #' @param Feature Your selected feature
 #' 
 #' @import dplyr
@@ -14,11 +13,10 @@
 #' 
 
 
-Gen_tk_data<-function(data,cluster,Feature){
-  colnames(data[,which(colnames(data)==cluster)])<-c("cluster")
+Gen_tk_data<-function(data,Feature){
   data <- data %>%
     tk_tbl() %>%
-    mutate(index = cluster)
+    mutate(index = clusters)
   data_idx<-data$index
   data<-data[,Feature]
   data<-cbind(data_idx,data)
