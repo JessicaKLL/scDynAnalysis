@@ -15,7 +15,7 @@
 
 
 Gen_tk_data<-function(data,cluster,Feature){
-  colnames(data[,cluster])<-c("cluster")
+  colnames(data[,which(colnames(data)==cluster)])<-c("cluster")
   data <- data %>%
     tk_tbl() %>%
     mutate(index = cluster)
