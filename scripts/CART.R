@@ -11,23 +11,23 @@ load("./Splited_Patient_data.RData")
 #Random Forest
 
 RF_P1<-list()
-for (i in 1:4) {
+for (i in 1:2) {
   RF_P1[[i]]<-RandomForest(as.factor(cell_type)~.,data=P1[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 RF_P2<-list()
-for (i in 1:4) {
+for (i in 1:2) {
   RF_P2[[i]]<-RandomForest(as.factor(cell_type)~.,data=P2[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 RF_P3<-list()
-for (i in 1:4) {
+for (i in 1:2) {
   RF_P3[[i]]<-RandomForest(as.factor(cell_type)~.,data=P3[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 RF_P4<-list()
-for (i in 1:4) {
+for (i in 1:2) {
   RF_P4[[i]]<-RandomForest(as.factor(cell_type)~.,data=P4[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 RF_P5<-list()
-for (i in 1:4) {
+for (i in 1:2) {
   RF_P5[[i]]<-RandomForest(as.factor(cell_type)~.,data=P5[[i]][,1:1387],strata = "cell_type",ntree=200,split=T)
 }
 
