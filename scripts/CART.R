@@ -364,42 +364,44 @@ P3_hclust<-divHier(P3)
 P4_hclust<-divHier(P4)
 P5_hclust<-divHier(P5)
 
-P1_new_P4<-gen_new_data(P1_hclust,method = "sum")
-P2_new_P4<-gen_new_data(P2_hclust,method = "sum")
-P3_new_P4<-gen_new_data(P3_hclust,method = "sum")
-P4_new_P4<-gen_new_data(P4_hclust,method = "sum")
-P5_new_P4<-gen_new_data(P5_hclust,method = "sum")
+P1_new_df<-gen_new_data(P1_hclust,method = "sum")
+P2_new_df<-gen_new_data(P2_hclust,method = "sum")
+P3_new_df<-gen_new_data(P3_hclust,method = "sum")
+P4_new_df<-gen_new_data(P4_hclust,method = "sum")
+P5_new_df<-gen_new_data(P5_hclust,method = "sum")
 
-P1_corr<-find_transition(P1_new_P4,cluster = "clusters",feat_num = feat_num)
-P2_corr<-find_transition(P2_new_P4,cluster = "clusters",feat_num = feat_num)
-P3_corr<-find_transition(P3_new_P4,cluster = "clusters",feat_num = feat_num)
-P4_corr<-find_transition(P4_new_P4,cluster = "clusters",feat_num = feat_num)
-P5_corr<-find_transition(P5_new_P4,cluster = "clusters",feat_num = feat_num)
+feat_num<-length(pVal_alter)
 
-P1_IP_orP3r<-cell_state_orP3r(P1_new_P4[which(P1_new_P4$time_point=="IP"),],root = P1_corr$IP3ntical$x)
-P1_Peak_orP3r<-cell_state_orP3r(P1_new_P4[which(P1_new_P4$time_point=="Peak"),],root = P1_corr$IP3ntical$y)
-P1_orP3r<-c(rev(P1_IP_orP3r),P1_Peak_orP3r)
-P1_orP3red_new_P4<-P1_new_P4[match(P1_orP3r, P1_new_P4$clusters),]
+P1_corr<-find_transition(P1_new_df,cluster = "clusters",feat_num = feat_num)
+P2_corr<-find_transition(P2_new_df,cluster = "clusters",feat_num = feat_num)
+P3_corr<-find_transition(P3_new_df,cluster = "clusters",feat_num = feat_num)
+P4_corr<-find_transition(P4_new_df,cluster = "clusters",feat_num = feat_num)
+P5_corr<-find_transition(P5_new_df,cluster = "clusters",feat_num = feat_num)
 
-P2_IP_orP3r<-cell_state_orP3r(P2_new_P4[which(P2_new_P4$time_point=="IP"),],root = P2_corr$IP3ntical$x)
-P2_Peak_orP3r<-cell_state_orP3r(P2_new_P4[which(P2_new_P4$time_point=="Peak"),],root = P2_corr$IP3ntical$y)
-P2_orP3r<-c(rev(P2_IP_orP3r),P2_Peak_orP3r)
-P2_orP3red_new_P4<-P2_new_P4[match(P2_orP3r, P2_new_P4$clusters),]
+P1_IP_order<-cell_state_order(P1_new_df[which(P1_new_df$time_point=="IP"),],root = P1_corr$Identical$x,feat_num = feat_num,cluster = "clusters")
+P1_Peak_order<-cell_state_order(P1_new_df[which(P1_new_df$time_point=="Peak"),],root = P1_corr$Identical$y,feat_num = feat_num,cluster = "clusters")
+P1_order<-c(rev(P1_IP_order),P1_Peak_order)
+P1_ordered_new_df<-P1_new_df[match(P1_order, P1_new_df$clusters),]
 
-P3_IP_orP3r<-cell_state_orP3r(P3_new_P4[which(P3_new_P4$time_point=="IP"),],root = P3_corr$IP3ntical$x)
-P3_Peak_orP3r<-cell_state_orP3r(P3_new_P4[which(P3_new_P4$time_point=="Peak"),],root = P3_corr$IP3ntical$y)
-P3_orP3r<-c(rev(P3_IP_orP3r),P3_Peak_orP3r)
-P3_orP3red_new_P4<-P3_new_P4[match(P3_orP3r, P3_new_P4$clusters),]
+P2_IP_order<-cell_state_order(P2_new_df[which(P2_new_df$time_point=="IP"),],root = P2_corr$Identical$x,feat_num = feat_num,cluster = "clusters")
+P2_Peak_order<-cell_state_order(P2_new_df[which(P2_new_df$time_point=="Peak"),],root = P2_corr$Identical$y,feat_num = feat_num,cluster = "clusters")
+P2_order<-c(rev(P2_IP_order),P2_Peak_order)
+P2_ordered_new_df<-P2_new_df[match(P2_order, P2_new_df$clusters),]
 
-P4_IP_orP3r<-cell_state_orP3r(P4_new_P4[which(P4_new_P4$time_point=="IP"),],root = P4_corr$IP3ntical$x)
-P4_Peak_orP3r<-cell_state_orP3r(P4_new_P4[which(P4_new_P4$time_point=="Peak"),],root = P4_corr$IP3ntical$y)
-P4_orP3r<-c(rev(P4_IP_orP3r),P4_Peak_orP3r)
-P4_orP3red_new_P4<-P4_new_P4[match(P4_orP3r, P4_new_P4$clusters),]
+P3_IP_order<-cell_state_order(P3_new_df[which(P3_new_P4$time_point=="IP"),],root = P3_corr$Identical$x,feat_num = feat_num,cluster = "clusters")
+P3_Peak_order<-cell_state_order(P3_new_df[which(P3_new_P4$time_point=="Peak"),],root = P3_corr$Identical$y,feat_num = feat_num,cluster = "clusters")
+P3_order<-c(rev(P3_IP_order),P3_Peak_order)
+P3_ordered_new_df<-P3_new_df[match(P3_order, P3_new_df$clusters),]
 
-P5_IP_orP3r<-cell_state_orP3r(P5_new_P4[which(P5_new_P4$time_point=="IP"),],root = P5_corr$IP3ntical$x)
-P5_Peak_orP3r<-cell_state_orP3r(P5_new_P4[which(P5_new_P4$time_point=="Peak"),],root = P5_corr$IP3ntical$y)
-P5_orP3r<-c(rev(P5_IP_orP3r),P5_Peak_orP3r)
-P5_orP3red_new_P4<-P5_new_P4[match(P5_orP3r, P5_new_P4$clusters),]
+P4_IP_order<-cell_state_order(P4_new_df[which(P4_new_df$time_point=="IP"),],root = P4_corr$Identical$x,feat_num = feat_num,cluster = "clusters")
+P4_Peak_order<-cell_state_order(P4_new_df[which(P4_new_df$time_point=="Peak"),],root = P4_corr$Identical$y,feat_num = feat_num,cluster = "clusters")
+P4_order<-c(rev(P4_IP_order),P4_Peak_order)
+P4_ordered_new_df<-P4_new_df[match(P4_order, P4_new_df$clusters),]
+
+P5_IP_order<-cell_state_order(P5_new_df[which(P5_new_df$time_point=="IP"),],root = P5_corr$Identical$x,feat_num = feat_num,cluster = "clusters")
+P5_Peak_order<-cell_state_order(P5_new_df[which(P5_new_df$time_point=="Peak"),],root = P5_corr$Identical$y,feat_num = feat_num,cluster = "clusters")
+P5_order<-c(rev(P5_IP_order),P5_Peak_order)
+P5_ordered_new_df<-P5_new_df[match(P5_order, P5_new_df$clusters),]
 
 # Dynamics
 
