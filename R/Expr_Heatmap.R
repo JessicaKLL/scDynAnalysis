@@ -27,7 +27,7 @@ Expr_Heatmap<-function(data, Features,main=""){
     colnames(cluster)<-"time_point"
     breaksList = seq(0, 10, by = 0.01)
     output<-pheatmap(x,cluster_rows=F,cluster_cols=F,show_colnames=F,show_rownames = T,
-                     annotation_col=cluster,color=turbo(100)(length(breaksList)),
+                     annotation_col=cluster,color=turbo(100),
                      breaks=breaksList,fontsize=12,main = main)
     return(output)
 }
